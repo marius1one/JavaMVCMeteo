@@ -1,9 +1,6 @@
 package com.example.javamvcmeteo.controllers;
 
-import com.example.javamvcmeteo.models.Coordinates;
-import com.example.javamvcmeteo.models.ForecastModel;
-import com.example.javamvcmeteo.models.ForecastTimestamp;
-import com.example.javamvcmeteo.models.Root;
+import com.example.javamvcmeteo.models.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -25,8 +22,14 @@ public class ForecastController {
     @GetMapping("/")
     public ModelAndView index(@RequestParam(required = false) String city) throws IOException {
         ModelAndView modelAndView = new ModelAndView("index");
+        var indexModel = new IndexModel();
+        indexModel.city = city;
+
         var forecasts = getForecasts(city);
-        modelAndView.addObject("forecasts", forecasts);
+        indexModel.forecasts = forecasts;
+
+
+        modelAndView.addObject("indexModel", indexModel);
 
         return modelAndView;
     }

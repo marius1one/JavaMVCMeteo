@@ -8,6 +8,11 @@
             background: darkslategray;
 
         }
+        select {
+            margin-left: 500px;
+            background: darkslategray;
+        }
+
 
         table {
 
@@ -21,19 +26,17 @@
         }
 
         table:hover {
-            border: 2px solid;
+            border: 2px solid white;
             color: black;
 
-            border-bottom-color: brown;
-            border-left-color: brown;
-            border-right-color: brown;
-            border-top-color: brown;
+
             text-align: center;
             text-effect: engrave;
 
         }
+
         td:hover {
-            border:2px solid white;
+            border: 2px solid white;
             background: aqua;
         }
 
@@ -63,6 +66,14 @@
     </style>
 </head>
 <body>
+<form method="get">
+    <select name="city" onchange="this.form.submit()">
+        <option value="">Select city</option>
+        <option value="vilnius" th:selected="${indexModel.city=='vilnius'}">Vilnius</option>
+        <option value="kaunas" th:selected="${indexModel.city=='kaunas'}">Kaunas</option>
+        <option value="klaipeda" th:selected="${indexModel.city=='klaipeda'}">Klaipeda</option>
+    </select>
+</form>
 <table>
 
     <tr>
@@ -70,7 +81,7 @@
         <th>Temperatura</th>
     </tr>
 
-    <tr th:each="forecast : ${forecasts}">
+    <tr th:each="forecast : ${indexModel.forecasts}">
         <td th:text="${forecast.dateTime}"></td>
         <td th:text="${forecast.temperature}"></td>
     </tr>
