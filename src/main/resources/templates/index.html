@@ -5,36 +5,40 @@
     <title>Title</title>
     <style>
         body {
-            background: aquamarine;
+            background: darkslategray;
 
         }
 
         table {
+
             animation: ease-in;
             margin: auto auto;
             box-shadow: brown;
             text-align: center;
             justify-self: center;
-            border: 2px solid black;
+            border: 2px solid dimgray;
+            border-radius: 5px;
         }
 
         table:hover {
             border: 2px solid;
-            color: dimgray;
-            font-weight: bold;
-            font-family: Constantia;
-            border-bottom-color: brown;
-            border-left-color: chartreuse;
-            border-right-color: blueviolet;
-            border-top-color: darkorange;
+            color: black;
 
+            border-bottom-color: brown;
+            border-left-color: brown;
+            border-right-color: brown;
+            border-top-color: brown;
             text-align: center;
             text-effect: engrave;
 
         }
+        td:hover {
+            border:2px solid white;
+            background: aqua;
+        }
 
         td {
-            border: 2px solid black;
+            border: 2px solid dimgray;
         }
 
         /* div {
@@ -65,19 +69,7 @@
         <th>Data</th>
         <th>Temperatura</th>
     </tr>
-    <!--    <tbody>-->
-    <!--    <tr>-->
-    <!--        <td>2024-03-12 10:00</td>-->
-    <!--        <td>5</td>-->
-    <!--    </tr>-->
-    <!--    <tr>-->
-    <!--        <td>2024-03-12 11:00</td>-->
-    <!--        <td>8</td>-->
-    <!--    </tr>-->
-    <!--    <tr>-->
-    <!--        <td>2024-03-12 12:00</td>-->
-    <!--        <td>10</td>-->
-    <!--    </tr>-->
+
     <tr th:each="forecast : ${forecasts}">
         <td th:text="${forecast.dateTime}"></td>
         <td th:text="${forecast.temperature}"></td>
