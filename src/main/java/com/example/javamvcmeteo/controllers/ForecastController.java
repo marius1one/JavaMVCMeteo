@@ -1,6 +1,11 @@
 package com.example.javamvcmeteo.controllers;
 
+import com.example.javamvcmeteo.models.Coordinates;
 import com.example.javamvcmeteo.models.ForecastModel;
+import com.example.javamvcmeteo.models.ForecastTimestamp;
+import com.example.javamvcmeteo.models.Root;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +27,8 @@ public class ForecastController {
 
         var forecasts = getForecastModels();
         var meteoForecastsJson = getMeteoForecastsJson();
-        System.out.println(meteoForecastsJson);
+
+        var objectFromJson = getForecastsFromJson(getMeteoForecastsJson());
 
         modelAndView.addObject("forecasts", forecasts);
 
@@ -46,15 +52,26 @@ public class ForecastController {
 
     }
 
-    private static ArrayList<ForecastModel> getForecastModels() {
-        var forecasts = new ArrayList<ForecastModel>();
-        var row1 = new ForecastModel("2024-03-12 11:00", 1.0);
-        var row2 = new ForecastModel("2024-03-12 12:00", 4.2);
-        var row3 = new ForecastModel("2024-03-12 13:00", 6.4);
+    private static Root getForecastsFromJson(String text) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Root obj = objectMapper.readValue(text, Root.class);
+        return obj;
 
-        forecasts.add(row1);
-        forecasts.add(row2);
-        forecasts.add(row3);
+    }
+
+
+    private static ArrayList<ForecastModel> getForecastModels() throws IOException {
+        var forecasts = new ArrayList<ForecastModel>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        Root meteoObj = objectMapper.readValue(getMeteoForecastsJson(), Root.class);
+
+        for (var item: meteoObj.forecastTimestamps) {
+            var row = new ForecastModel(item.forecastTimeUtc, item.airTemperature);
+            forecasts.add(row);
+        }
+
         return forecasts;
     }
+
+
 }
