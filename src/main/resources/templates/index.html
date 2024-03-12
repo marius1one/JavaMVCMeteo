@@ -11,6 +11,7 @@
 
         table {
 
+            
             justify-self: center;
             border: 2px solid black;
         }
@@ -47,20 +48,24 @@
         <th>Data</th>
         <th>Temperatura</th>
     </tr>
-    <tbody>
-    <tr>
-        <td>2024-03-12 10:00</td>
-        <td>5</td>
+<!--    <tbody>-->
+<!--    <tr>-->
+<!--        <td>2024-03-12 10:00</td>-->
+<!--        <td>5</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td>2024-03-12 11:00</td>-->
+<!--        <td>8</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td>2024-03-12 12:00</td>-->
+<!--        <td>10</td>-->
+<!--    </tr>-->
+    <tr th:each="forecast : ${forecasts}">
+        <td th:text="${forecast.dateTime}"></td>
+        <td th:text="${forecast.temperature}"></td>
     </tr>
-    <tr>
-        <td>2024-03-12 11:00</td>
-        <td>8</td>
-    </tr>
-    <tr>
-        <td>2024-03-12 12:00</td>
-        <td>10</td>
-    </tr>
-    </tbody>
+
 </table>
 </body>
 </html>
