@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Siandien</title>
+    <style>
+        body {
+            background-color: #BD8E62;
+        }
+    </style>
+</head>
+<body>
+<div style="align-self: center">
+
+    <h1 th:text="${indexModel.city}"></h1>
+    <h1>Temperatura</h1>
+    <p th:text="${indexModel.forecasts.getFirst().temperature}"></p>
+    <h2>Vejo greitis</h2>
+    <p th:text="${indexModel.forecasts.getFirst().windSpeed}"></p>
+</div>
+
+</body>
+</html>

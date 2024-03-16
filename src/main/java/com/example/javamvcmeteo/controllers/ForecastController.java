@@ -34,6 +34,28 @@ public class ForecastController {
         return modelAndView;
     }
 
+    @GetMapping("/siandien")
+    public ModelAndView siandien() throws IOException {
+        ModelAndView modelAndView = new ModelAndView("siandien");
+        var indexModel = new IndexModel();
+        indexModel.city = "Vilnius";
+
+
+        var forecasts = getForecasts("vilnius");
+        indexModel.forecasts = forecasts;
+        ForecastModel forecastModel;
+
+        forecastModel = new ForecastModel(indexModel.forecasts.get(0).dateTime,
+                indexModel.forecasts.get(0).temperature,
+                indexModel.forecasts.get(0).windSpeed);
+
+
+        modelAndView.addObject("indexModel", indexModel);
+
+        return modelAndView;
+    }
+
+
     public static String GetMeteoForecastsJson(String city) throws IOException {
         URL url = new URL("https://api.meteo.lt/v1/places/" + city + "/forecasts/long-term");
 
@@ -57,7 +79,7 @@ public class ForecastController {
             var meteoForecastsJson = GetMeteoForecastsJson(city);
             Root meteoObj = GetObjectFromJson(meteoForecastsJson);
             for (var item : meteoObj.forecastTimestamps) {
-                var row = new ForecastModel(item.forecastTimeUtc, item.airTemperature);
+                var row = new ForecastModel(item.forecastTimeUtc, item.airTemperature, item.windSpeed);
                 forecasts.add(row);
             }
         }
