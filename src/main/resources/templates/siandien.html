@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Siandien</title>
@@ -75,6 +75,7 @@ height: 100vh;
 }">
 
     <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button" style="width: 10%; float: left">Pradinis</button>
+    <div sec:authentication="name" style="float: right; color: whitesmoke; font-size: xx-large"></div>
     <div>
 
         <form method="get">
