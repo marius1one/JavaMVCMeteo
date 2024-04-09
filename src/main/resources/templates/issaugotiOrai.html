@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Issaugoti orai</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Miestas</th>
+        <th>Data</th>
+        <th>Temperatura</th>
+    </tr>
+    <tr th:each="forecast : ${forecasts}">
+        <td th:text="${forecast.City}"></td>
+        <td th:text="${forecast.date}"></td>
+        <td th:text="${forecast.temperature}"></td>
+    </tr>
+</table>
+</body>
+</html>
