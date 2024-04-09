@@ -1,7 +1,7 @@
 package com.example.javamvcmeteo.controllers;
 
+import com.example.javamvcmeteo.models.ForecastModel;
 import com.example.javamvcmeteo.models.IndexModel;
-import com.example.javamvcmeteo.service.ForecastService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,15 +9,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 
+import static com.example.javamvcmeteo.service.ForecastService.getForecasts;
+import static com.example.javamvcmeteo.service.ForecastService.getForecastsWithDate;
+
 @Controller
 public class ForecastController {
+
     @GetMapping("/")
-    public ModelAndView index(@RequestParam(required = false) String city) throws IOException {
+    public ModelAndView index(@RequestParam(required = false) String city, @RequestParam(required = false) String date) throws IOException {
         ModelAndView modelAndView = new ModelAndView("index");
         var indexModel = new IndexModel();
         indexModel.city = city;
+        indexModel.date = date;
 
-        var forecasts = ForecastService.getForecasts(city);
+        var forecasts = getForecastsWithDate(city, date);
         indexModel.forecasts = forecasts;
 
 
@@ -26,7 +31,7 @@ public class ForecastController {
         return modelAndView;
     }
 
-   /* @GetMapping("/siandien")
+    @GetMapping("/siandien")
     public ModelAndView siandien(@RequestParam(required = false) String city) throws IOException {
         ModelAndView modelAndView = new ModelAndView("siandien");
 
@@ -65,7 +70,7 @@ public class ForecastController {
     }
 
 
-*/
+
 
 
 }

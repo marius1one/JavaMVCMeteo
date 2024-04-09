@@ -10,7 +10,7 @@
     <style>
         body {
             background: rgb(40, 14, 59);
-            background: linear-gradient(0deg, rgba(40, 14, 59, 1) 0%, rgba(161, 62, 151, 1) 100%);
+            background: linear-gradient(180deg, rgba(40, 14, 59, 1) 0%, rgba(161, 62, 151, 1) 100%);
             height: 100vh;
         }
 
@@ -36,66 +36,18 @@
         }
 
 
-        /* table {
 
-             animation: ease-in;
-             margin: auto auto;
-             box-shadow: brown;
-             text-align: center;
-             justify-self: center;
-             border: 2px solid dimgray;
-             border-radius: 5px;
-         }
-
-
-         table:hover {
-             border: 2px solid white;
-             color: black;
-
-
-             text-align: center;
-             text-effect: engrave;
-
-         }
-
-         td:hover {
-             border: 2px solid white;
-             background: aqua;
-         }
-
-         td {
-             border: 2px solid dimgray;
-         }*/
-
-        /* div {
-             align-items: center;
-             align-content: center;
-             position: relative;
-             width: 10%;
-             font-weight: 500;
-             border: solid 2px azure;
-             border-radius: 15px;
-             margin-left: 700px;
-             margin-top: 300px;
-         }*/
-
-        /* p {
-             margin-left: 10px;
-         }
-
-         div:hover {
-             background: bisque;
-         }*/
     </style>
 </head>
 <body>
 <div class="container">
 
-    <div class="btn-group d-grid gap-3 d-md-block" role="group" style="margin-bottom: 10px">
+    <div class="btn-group d-grid gap-3 d-md-block" role="group" style="margin-bottom: 10px; margin-top: 15px">
         <button type="button" class="btn btn-outline-light" role="button">Orai didziuosiuose miestuose</button>
         <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Oras Dabar</button>
         <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Rytoj</button>
         <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Savaites orai</button>
+        <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Issaugoti orai</button>
 
         <div sec:authentication="name" style="float: right; color: whitesmoke; font-size: xx-large"></div>
 
@@ -112,6 +64,8 @@
             <option value="alytus" th:selected="${indexModel.city=='alytus'}">Alytus</option>
             <option value="telsiai" th:selected="${indexModel.city=='telsiai'}">Telšiai</option>
         </select>
+        <input type="date" name="date" th:value="${indexModel.date}" onchange="this.form.submit()">
+
     </form>
 
     <table id="myTable" class="table table-hover table-striped" style="width:50%;">
@@ -147,6 +101,11 @@
     document.getElementsByTagName("button")[1].onclick = function () {
         location.href = "/siandien"
     }</script>
+<script>
+    document.getElementsByTagName("button")[4].onclick = () => {
+        location.href = "/issaugotiOrai"
+    }
+</script>
 <script>
     function save(element) {
         var parent = element.parentElement.parentElement;

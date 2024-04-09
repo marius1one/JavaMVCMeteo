@@ -13,15 +13,15 @@ public class ForecastEntity  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
 
-    public String City;
+    public String city;
     public String date;
 
     public String temperature;
     public ForecastEntity() {
     }
 
-public ForecastEntity(String City, String date, String temperature) {
-        this.City = City;
+public ForecastEntity(String city, String date, String temperature) {
+        this.city = city;
         this.date = date;
         this.temperature = temperature;
     }

@@ -9,5 +9,6 @@ public interface ForecastRepository extends CrudRepository<ForecastEntity, Integ
     List<ForecastEntity> findAll();
 
 
+
 }
 

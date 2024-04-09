@@ -15,7 +15,7 @@
     }
 
     body {
-        background: linear-gradient(90deg, rgba(40,14,59,1),rgba(161,62,151,1) );
+        background: linear-gradient(180deg, rgba(40,14,59,1),rgba(161,62,151,1) );
     }
 
     .container {
@@ -205,10 +205,14 @@
                     <input type="password" class="login__input" name="password" placeholder="Password">
                 </div>
                 <button class="button login__submit" type="submit">
-                    <span class="button__text">Log In Now</span>
+                    <span class="button__text">Prisijungti</span>
                     <i class="button__icon fas fa-chevron-right"></i>
                 </button>
-                <div th:if="${param.logout}" style="margin: 25px">
+                <button class="button login__submit" type="submit">
+                    <span class="button__text">Registruotis</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+                <div th:if="${param.logout}" style="margin: 25px; color: whitesmoke">
                     You have been logged out.</div>
 
             </form>

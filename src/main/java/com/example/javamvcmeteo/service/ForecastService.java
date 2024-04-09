@@ -29,6 +29,23 @@ public class ForecastService {
         return text;
     }
 
+    public static ArrayList<ForecastModel> getForecastsWithDate(String city, String date) throws IOException {
+        var forecasts = new ArrayList<ForecastModel>();
+
+        if (city != null && !city.equals("")) {
+            var meteoForecastsJson = GetMeteoForecastsJson(city);
+            Root meteoObj = GetObjectFromJson(meteoForecastsJson);
+            for (var item : meteoObj.forecastTimestamps) {
+                if (date == null || item.forecastTimeUtc.startsWith(date))
+                {
+                var row = new ForecastModel(item.forecastTimeUtc, item.airTemperature, item.windSpeed);
+                forecasts.add(row);}
+            }
+        }
+
+        return forecasts;
+    }
+
     public static ArrayList<ForecastModel> getForecasts(String city) throws IOException {
         var forecasts = new ArrayList<ForecastModel>();
 

@@ -12,7 +12,7 @@
         <th>Temperatura</th>
     </tr>
     <tr th:each="forecast : ${forecasts}">
-        <td th:text="${forecast.City}"></td>
+        <td th:text="${forecast.city}"></td>
         <td th:text="${forecast.date}"></td>
         <td th:text="${forecast.temperature}"></td>
     </tr>
