@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head>
     <meta charset="UTF-8">
 
@@ -9,13 +9,30 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {
-            background-color: #BD8E62;
+            background: rgb(40, 14, 59);
+            background: linear-gradient(0deg, rgba(40, 14, 59, 1) 0%, rgba(161, 62, 151, 1) 100%);
+            height: 100vh;
+        }
 
+        .table-striped > tbody > tr:nth-child(odd) > td,
+        .table-striped > tbody > tr:nth-child(odd) > th {
+            background-color: rgb(40, 14, 59);
+            color: #d3b7d8;
+        }
+
+        .table-striped > tbody > tr:nth-child(even) > td,
+        .table-striped > tbody > tr:nth-child(even) > th {
+            background-color: #a13e97;
+            color: rgb(40, 14, 59);
+        }
+
+        .table > th {
+            background-color: #a13e97;
         }
 
         select {
             margin-left: 500px;
-            background: #D5D2C1;
+            background: #a13e97;
         }
 
 
@@ -73,11 +90,14 @@
 </head>
 <body>
 <div class="container">
-    <button type="button" class="btn btn-outline-success">Orai didziuosiuose miestuose</button>
-    <div class="btn-group d-grid gap-3 d-md-block" role="group">
-        <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Siandien</button>
+
+    <div class="btn-group d-grid gap-3 d-md-block" role="group" style="margin-bottom: 10px">
+        <button type="button" class="btn btn-outline-light" role="button">Orai didziuosiuose miestuose</button>
+        <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Oras Dabar</button>
         <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Rytoj</button>
         <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Savaites orai</button>
+
+        <div sec:authentication="name" style="float: right; color: whitesmoke; font-size: xx-large"></div>
 
     </div>
     <form method="get">
@@ -86,10 +106,15 @@
             <option value="vilnius" th:selected="${indexModel.city=='vilnius'}">Vilnius</option>
             <option value="kaunas" th:selected="${indexModel.city=='kaunas'}">Kaunas</option>
             <option value="klaipeda" th:selected="${indexModel.city=='klaipeda'}">Klaipeda</option>
+            <option value="siauliai" th:selected="${indexModel.city=='siauliai'}">Siauliai</option>
+            <option value="panevezys" th:selected="${indexModel.city=='panevezys'}">Panevezys</option>
+            <option value="marijampole" th:selected="${indexModel.city=='marijampole'}">Marijampole</option>
+            <option value="alytus" th:selected="${indexModel.city=='alytus'}">Alytus</option>
+            <option value="telsiai" th:selected="${indexModel.city=='telsiai'}">Telsiai</option>
         </select>
     </form>
 
-    <table id="myTable" class="table table-warning table-hover table-striped" style="width:50%; color:whitesmoke">
+    <table id="myTable" class="table table-hover table-striped" style="width:50%;">
         <thead>
         <tr>
             <th>Data</th>
@@ -100,11 +125,11 @@
         </thead>
         <tbody>
         <tr th:each="forecast : ${indexModel.forecasts}">
-            <td th:text="${forecast.dateTime}"></td>
-            <td th:text="${forecast.temperature}"></td>
+            <td class="date" th:text="${forecast.dateTime}"></td>
+            <td class="temperature" th:text="${forecast.temperature}"></td>
             <td th:text="${forecast.windSpeed}"></td>
             <td>
-                <button class="btn btn-light btn-sm">Save</button>
+                <button class="btn btn-light btn-sm" onclick="save(this)">Save</button>
             </td>
         </tr>
         </tbody>
@@ -119,6 +144,40 @@
 <script src="https://cdn.datatables.net/2.0.2/js/dataTables.min.js"></script>
 <script>
     let table = new DataTable('#myTable');
+    document.getElementsByTagName("button")[1].onclick = function () {
+        location.href = "/siandien"
+    }</script>
+<script>
+    function save(element) {
+        var parent = element.parentElement.parentElement;
+        var date = parent.getElementsByClassName('date')[0].textContent;
+        var temperature = parent.getElementsByClassName('temperature')[0].textContent;
+        var selectElement = document.getElementsByName('city')[0];
+        var city = selectElement.value;
+        var data = {
+            "dateTime": date,
+            "city": city,
+            "temperature": temperature
+        };
+
+        $.ajax({
+            url: '/saveData',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+                console.log("Data sent successfully");
+            },
+            error: function (error) {
+                console.log("Error while sending data: ", error);
+            }
+        });
+
+    }</script>
+
+   <script> document.getElementsByTagName("button")[0].onclick = function () {
+        location.href = "/oraiDidziuosiuoseMiestuose"
+    }
 </script>
 
 

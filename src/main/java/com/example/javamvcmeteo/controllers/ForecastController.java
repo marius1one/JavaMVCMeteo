@@ -1,21 +1,13 @@
 package com.example.javamvcmeteo.controllers;
 
-import com.example.javamvcmeteo.models.*;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.javamvcmeteo.models.IndexModel;
+import com.example.javamvcmeteo.service.ForecastService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 @Controller
 public class ForecastController {
@@ -25,7 +17,7 @@ public class ForecastController {
         var indexModel = new IndexModel();
         indexModel.city = city;
 
-        var forecasts = getForecasts(city);
+        var forecasts = ForecastService.getForecasts(city);
         indexModel.forecasts = forecasts;
 
 
@@ -34,20 +26,24 @@ public class ForecastController {
         return modelAndView;
     }
 
-    @GetMapping("/siandien")
-    public ModelAndView siandien() throws IOException {
+   /* @GetMapping("/siandien")
+    public ModelAndView siandien(@RequestParam(required = false) String city) throws IOException {
         ModelAndView modelAndView = new ModelAndView("siandien");
+
         var indexModel = new IndexModel();
-        indexModel.city = "Vilnius";
+        indexModel.city = city;
+
+        if (indexModel.city == null || indexModel.city.equals("")) {
+            city = "vilnius";
+            indexModel.city = "Vilnius";
+        }
+        var forecasts = getForecasts(city);
 
 
-        var forecasts = getForecasts("vilnius");
         indexModel.forecasts = forecasts;
         ForecastModel forecastModel;
 
-        forecastModel = new ForecastModel(indexModel.forecasts.get(0).dateTime,
-                indexModel.forecasts.get(0).temperature,
-                indexModel.forecasts.get(0).windSpeed);
+        forecastModel = new ForecastModel(indexModel.forecasts.get(0).dateTime, indexModel.forecasts.get(0).temperature, indexModel.forecasts.get(0).windSpeed);
 
 
         modelAndView.addObject("indexModel", indexModel);
@@ -55,41 +51,21 @@ public class ForecastController {
         return modelAndView;
     }
 
+    @GetMapping("/oraiDidziuosiuoseMiestuose")
 
-    public static String GetMeteoForecastsJson(String city) throws IOException {
-        URL url = new URL("https://api.meteo.lt/v1/places/" + city + "/forecasts/long-term");
-
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.connect();
-
-        String text = "";
-        Scanner scanner = new Scanner(url.openStream());
-        while (scanner.hasNext()) {
-            text += scanner.nextLine();
-        }
-        scanner.close();
-        return text;
+    public ModelAndView oraiDidziuosiuoseMiestuose() {
+        ModelAndView modelAndView = new ModelAndView("oraiDidziuosiuoseMiestuose");
+        var indexModel = new IndexModel();
+        var indexModel1 = new IndexModel();
+        var indexModel2 = new IndexModel();
+        indexModel.city = "vilnius";
+        indexModel1.city = "kaunas";
+        indexModel2.city = "klaipeda";
+        return modelAndView;
     }
 
-    private static ArrayList<ForecastModel> getForecasts(String city) throws IOException {
-        var forecasts = new ArrayList<ForecastModel>();
 
-        if (city != null && !city.equals("")) {
-            var meteoForecastsJson = GetMeteoForecastsJson(city);
-            Root meteoObj = GetObjectFromJson(meteoForecastsJson);
-            for (var item : meteoObj.forecastTimestamps) {
-                var row = new ForecastModel(item.forecastTimeUtc, item.airTemperature, item.windSpeed);
-                forecasts.add(row);
-            }
-        }
+*/
 
-        return forecasts;
-    }
 
-    private static Root GetObjectFromJson(String json) throws JsonProcessingException {
-        ObjectMapper om = new ObjectMapper();
-        Root meteoObj = om.readValue(json, Root.class);
-        return meteoObj;
-    }
 }

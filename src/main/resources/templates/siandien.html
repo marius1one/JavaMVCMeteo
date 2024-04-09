@@ -3,21 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <title>Siandien</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
+
         body {
-            background-color: #BD8E62;
+            background: rgb(40,14,59);
+            background: linear-gradient(0deg, rgba(40,14,59,1) 0%, rgba(161,62,151,1) 100%);
+            display: flex;
+            overflow: hidden;
+
         }
+
+
+
+        div {
+            margin: 0 auto auto;
+color: #d3b7d8;
+        }
+
+        select {
+
+            background: #a13e97;
+        }
+
     </style>
 </head>
 <body>
-<div style="align-self: center">
 
-    <h1 th:text="${indexModel.city}"></h1>
-    <h1>Temperatura</h1>
-    <p th:text="${indexModel.forecasts.getFirst().temperature}"></p>
-    <h2>Vejo greitis</h2>
-    <p th:text="${indexModel.forecasts.getFirst().windSpeed}"></p>
+<div style="height: 98vh;
+ width: 15%;
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;">
+    <div>
+        <p th:text="${indexModel.forecasts.get(1).dateTime}"></p>
+        <p th:text="${indexModel.forecasts.get(1).temperature}">Temperatura</p>
+        <p th:text="${indexModel.forecasts.get(1).windSpeed}">Vejo greitis</p>
+    </div>
+    <div>
+        <p th:text="${indexModel.forecasts.get(2).dateTime}"></p>
+        <p th:text="${indexModel.forecasts.get(2).temperature}">Temperatura</p>
+        <p th:text="${indexModel.forecasts.get(2).windSpeed}">Vejo greitis</p>
+    </div>
+    <div>
+        <p th:text="${indexModel.forecasts.get(3).dateTime}"></p>
+        <p th:text="${indexModel.forecasts.get(3).temperature}">Temperatura</p>
+        <p th:text="${indexModel.forecasts.get(3).windSpeed}">Vejo greitis</p>
+    </div>
+    <div>
+        <p th:text="${indexModel.forecasts.get(4).dateTime}"></p>
+        <p th:text="${indexModel.forecasts.get(4).temperature}">Temperatura</p>
+        <p th:text="${indexModel.forecasts.get(4).windSpeed}">Vejo greitis</p>
+    </div>
+    <div>
+        <p th:text="${indexModel.forecasts.get(5).dateTime}"></p>
+        <p th:text="${indexModel.forecasts.get(5).temperature}">Temperatura</p>
+        <p th:text="${indexModel.forecasts.get(5).windSpeed}">Vejo greitis</p>
+    </div>
+    <div>
+        <p th:text="${indexModel.forecasts.get(6).dateTime}"></p>
+        <p th:text="${indexModel.forecasts.get(6).temperature}">Temperatura</p>
+        <p th:text="${indexModel.forecasts.get(6).windSpeed}">Vejo greitis</p>
+    </div>
+</div>
+<div  style="width: 70%;
+height: 100vh;
+ display: flex;
+    flex-direction: column;
+
+}">
+
+    <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button" style="width: 10%; float: left">Pradinis</button>
+    <div>
+
+        <form method="get">
+            <select th:each="city : ${indexModel.city}" name="city" onchange="this.form.submit()">
+                <option value="">Select city</option>
+                <option value="Vilnius" th:selected="${indexModel.city=='vilnius'}">Vilnius</option>
+                <option value="Kaunas" th:selected="${indexModel.city=='kaunas'}">Kaunas</option>
+                <option value="Klaipeda" th:selected="${indexModel.city=='klaipeda'}">Klaipeda</option>
+                <option value="Siauliai" th:selected="${indexModel.city=='siauliai'}">Siauliai</option>
+                <option value="Panevezys" th:selected="${indexModel.city=='panevezys'}">Panevezys</option>
+                <option value="Marijampole" th:selected="${indexModel.city=='marijampole'}">Marijampole</option>
+                <option value="Alytus" th:selected="${indexModel.city=='alytus'}">Alytus</option>
+                <option value="Telsiai" th:selected="${indexModel.city=='telsiai'}">Telsiai</option>
+
+            </select>
+        </form>
+    </div>
+
+    <div style="margin-top: 10px">
+        <h1 th:text="${indexModel.city}" style=" font-size: xxx-large"></h1></div>
+
+    <div><h1 ><span>Temperatura</span>
+        <span>Temperatura</span>
+    </h1></div>
+
+
+    <div ><h2 th:text="${indexModel.forecasts.get(0).temperature}" style="font-size: xxx-large"></h2></div>
+
+
+    <div ><h2>Vejo greitis</h2></div>
+    <div th:text="${indexModel.forecasts.get(0).windSpeed}"
+         style=" margin-top: 10px;font-size: xx-large"></div>
 </div>
 
+<div style="height: 98vh;
+ width: 15%;
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;">
+
+    <div>
+        <p th:text="${indexModel.forecasts.get(7).dateTime}"></p>
+        <p th:text="${indexModel.forecasts.get(7).temperature}">Temperatura</p>
+        <p th:text="${indexModel.forecasts.get(7).windSpeed}">Vejo greitis</p>
+    </div>
+    <div>
+        <p th:text="${indexModel.forecasts.get(8).dateTime}"></p>
+        <p th:text="${indexModel.forecasts.get(8).temperature}">Temperatura</p>
+        <p th:text="${indexModel.forecasts.get(8).windSpeed}">Vejo greitis</p>
+    </div>
+    <div>
+        <p th:text="${indexModel.forecasts.get(9).dateTime}"></p>
+        <p th:text="${indexModel.forecasts.get(9).temperature}">Temperatura</p>
+        <p th:text="${indexModel.forecasts.get(9).windSpeed}">Vejo greitis</p>
+    </div>
+    <div>
+        <p th:text="${indexModel.forecasts.get(10).dateTime}"></p>
+        <p th:text="${indexModel.forecasts.get(10).temperature}">Temperatura</p>
+        <p th:text="${indexModel.forecasts.get(10).windSpeed}">Vejo greitis</p>
+    </div>
+    <div>
+        <p th:text="${indexModel.forecasts.get(11).dateTime}"></p>
+        <p th:text="${indexModel.forecasts.get(11).temperature}">Temperatura</p>
+        <p th:text="${indexModel.forecasts.get(11).windSpeed}">Vejo greitis</p>
+    </div>
+    <div>
+        <p th:text="${indexModel.forecasts.get(12).dateTime}"></p>
+        <p th:text="${indexModel.forecasts.get(12).temperature}">Temperatura</p>
+        <p th:text="${indexModel.forecasts.get(12).windSpeed}">Vejo greitis</p>
+    </div>
+</div>
+
+
 </body>
+<script>
+    document.getElementsByTagName("button")[0].onclick=function (){
+        location.href = "/"
+    }
+</script>
 </html>

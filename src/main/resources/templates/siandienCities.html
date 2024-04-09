@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table >
+    <thead>
+    <tr>
+        <th>Data</th>
+        <th>Temperatura</th>
+        <th>Vejo greitis</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="miestas : ${miestai}">
+        <td th:text="${miestas.city}"></td>
+
+        <td>
+            <button >Save</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,8 +1,9 @@
 package com.example.javamvcmeteo.models;
 
 public class ForecastModel {
+
     public String dateTime;
-    public double temperature;
+    public Double temperature;
     public int windSpeed;
 
     public ForecastModel(String dateTime, double temperature, int windSpeed) {
@@ -10,4 +11,6 @@ public class ForecastModel {
         this.temperature = temperature;
         this.windSpeed = windSpeed;
     }
+
+
 }
