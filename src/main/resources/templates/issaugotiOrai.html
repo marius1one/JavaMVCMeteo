@@ -5,7 +5,12 @@
     <title>Issaugoti orai</title>
 </head>
 <body>
-<div sec:authentication="name" style="float: right; color: dimgray; font-size: xx-large"></div>
+<div sec:authentication="name" style="float: right; color: dimgray; font-size: xx-large">
+</div>
+<div><form action="/logout" method="post">
+    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+    <input type="submit" value="Logout">
+</form></div>
 <table>
     <tr>
         <th>Miestas</th>

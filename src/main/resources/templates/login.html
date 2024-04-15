@@ -37,6 +37,10 @@
         z-index: 1;
         position: relative;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .screen__background {
@@ -95,6 +99,9 @@
         width: 320px;
         padding: 30px;
         padding-top: 156px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .login__field {
@@ -144,6 +151,10 @@
         transition: .2s;
     }
 
+
+
+
+
     .login__submit:active,
     .login__submit:focus,
     .login__submit:hover {
@@ -184,7 +195,18 @@
         transform: scale(1.5);
     }
 </style>
+<script>
+    window.onload = function() {
+        var loginButton = document.querySelector('.button.login__submit');
+        var computedStyle = window.getComputedStyle(loginButton);
+        var width = computedStyle.width;
+        var height = computedStyle.height;
 
+        var registerButton = document.querySelector('.button.login__submit.register-button');
+        registerButton.style.width = width;
+        registerButton.style.height = height;
+    }
+</script>
 </head>
 <body>
 
@@ -195,27 +217,26 @@
 
             <form class="login" th:action="@{/login}" method="post">
                 <div th:if="${param.error}">
-                    Invalid username and password.</div>
+                    Neteisingas vartotojo vardas arba slaptazodis.</div>
                 <div class="login__field">
                     <i class="login__icon fas fa-user"></i>
-                    <input type="text" class="login__input" name="username" placeholder="User name">
+                    <input type="text" class="login__input" name="username" placeholder="Vartotojo vardas">
                 </div>
                 <div class="login__field">
                     <i class="login__icon fas fa-lock"></i>
-                    <input type="password" class="login__input" name="password" placeholder="Password">
+                    <input type="password" class="login__input" name="password" placeholder="Slaptazodis">
                 </div>
                 <button class="button login__submit" type="submit">
                     <span class="button__text">Prisijungti</span>
                     <i class="button__icon fas fa-chevron-right"></i>
                 </button>
-                <button class="button login__submit" type="submit">
-                    <span class="button__text">Registruotis</span>
-                    <i class="button__icon fas fa-chevron-right"></i>
-                </button>
                 <div th:if="${param.logout}" style="margin: 25px; color: whitesmoke">
-                    You have been logged out.</div>
-
+                    Atsijungta</div>
             </form>
+            <a href = "/register"  class="button login__submit register-button" >
+                <span class="button__text">Registruotis</span>
+                <i class="button__icon fas fa-chevron-right"></i>
+            </a>
 
         </div>
         <div class="screen__background">

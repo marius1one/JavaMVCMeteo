@@ -54,7 +54,12 @@
         <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Savaites orai</button>
         <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Issaugoti orai</button>
 
-        <div sec:authentication="name" style="float: right; color: whitesmoke; font-size: xx-large"></div>
+        <div sec:authentication="name" style="float: right; color: whitesmoke; font-size: xx-large">
+        </div>
+        <div><form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+            <input type="submit" value="Logout">
+        </form></div>
 
     </div>
     <form method="get">

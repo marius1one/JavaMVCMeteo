@@ -1,9 +1,6 @@
 package com.example.javamvcmeteo.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 
@@ -17,6 +14,8 @@ public class ForecastEntity  {
     public String date;
 
     public String temperature;
+    @ManyToOne
+    private UserEntity user;
     public ForecastEntity() {
     }
 
@@ -26,5 +25,11 @@ public ForecastEntity(String city, String date, String temperature) {
         this.temperature = temperature;
     }
 
+    public UserEntity getUser() {
+        return user;
+    }
 
+    public void setUser(UserEntity currentUser) {
+        this.user = currentUser;
+    }
 }
