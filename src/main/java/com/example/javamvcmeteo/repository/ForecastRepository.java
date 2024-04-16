@@ -11,5 +11,7 @@ public interface ForecastRepository extends CrudRepository<ForecastEntity, Integ
 
 
     List<ForecastEntity> findByUser(UserEntity currentUser);
+
+    boolean existsByDateAndCityAndUser(String date, String city, UserEntity user);
 }
 

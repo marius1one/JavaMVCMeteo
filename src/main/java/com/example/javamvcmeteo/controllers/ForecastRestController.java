@@ -29,8 +29,8 @@ public class ForecastRestController {
         var date = model.dateTime;
         var city = model.city;
         var temperature = ForecastService.getTemperature(city, date);
-
-        var forecastEntity = new ForecastEntity(city, date, temperature);
+        var conditionCode = ForecastService.getCondition(city, date);
+        var forecastEntity = new ForecastEntity(city, date, temperature, conditionCode);
         forecastEntity.setUser(currentUser);
         forecastRepository.save(forecastEntity);
 

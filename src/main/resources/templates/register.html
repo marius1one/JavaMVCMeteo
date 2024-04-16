@@ -180,7 +180,7 @@
     <div class="screen">
         <div class="screen__content">
 
-<form class="login" th:action="@{/register}" method="post">
+<form class="login" th:action="@{/register}" method="post" onsubmit="return validateForm()">
     <div class="login__field">
         <i class="login__icon fas fa-user"></i>
     <input type="text" class="login__input" name="username" placeholder="Vartotojo vardas" required>
@@ -188,7 +188,7 @@
 
     <div class="login__field">
         <i class="login__icon fas fa-lock"></i>
-    <input type="password" class="login__input" name="password" placeholder="Slaptazodis" required>
+    <input type="password" class="login__input" id="password" name="password" placeholder="Slaptazodis" required>
     </div>
     <div class="login__field">
         <i class="login__icon fas fa-lock"></i>
@@ -209,4 +209,14 @@
     </div>
 </div>
 </body>
+
 </html>
+<script>function validateForm() {
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirmPassword").value;
+    if (password !== confirmPassword) {
+        alert("Ivesti slaptazodziai nesutampa!");
+        return false;
+    }
+    return true;
+}</script>

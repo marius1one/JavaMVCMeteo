@@ -27,6 +27,47 @@ color: #d3b7d8;
             background: #a13e97;
         }
 
+        .login__submit {
+            background: #fff;
+            font-size: 12px;
+
+            padding: 6px 10px;
+            border-radius: 26px;
+            border: 1px solid #D4D3E8;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            color: rgba(40,14,59,1);
+            box-shadow: 0px 2px 2px #5C5696;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+
+
+
+
+        .login__submit:active,
+        .login__submit:focus,
+        .login__submit:hover {
+            border-color: #6A679E;
+            outline: none;
+        }
+
+        .button__icon {
+            font-size: 16px;
+            margin-left: auto;
+            color: #7875B5;
+        }
+        .ikona {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            margin-left: 5px;
+        }
+
     </style>
 </head>
 <body>
@@ -74,11 +115,14 @@ height: 100vh;
 
 }">
 
-    <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button" style="width: 10%; float: left">Pradinis</button>
+    <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button" style="width: 10%; float: left">Pradinis<img class="ikona" src="/img/home.png"></button>
     <div sec:authentication="name" style="float: right; color: whitesmoke; font-size: xx-large"></div>
     <div><form action="/logout" method="post">
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-        <input type="submit" value="Logout">
+        <button class="button login__submit" type="submit">
+            <span class="button__text">Atsijungti</span>
+            <i class="button__icon fas fa-chevron-right"></i>
+        </button>
     </form></div>
     <div>
 

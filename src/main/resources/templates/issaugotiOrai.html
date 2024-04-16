@@ -1,27 +1,185 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Issaugoti orai</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 10vh;
+            background-color: #000;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-right {
+            gap: 10px;
+        }
+
+        .username {
+            margin-right: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2em;
+            color: #fff;
+        }
+
+        .table th, .table td {
+            border: 1px solid #E0E0E0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #000;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        button, input {
+            background-color: #E50914;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin: 10px;
+        }
+
+        button:hover, input:hover {
+            background-color: #fff;
+            color: #E50914;
+        }
+
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .table tr:nth-child(even) {
+            animation: slideInFromLeft 1s forwards;
+        }
+
+        .table tr:nth-child(odd) {
+            animation: slideInFromRight 1s forwards;
+        }
+        .ikona {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            margin-left: 5px;
+        }
+    </style>
 </head>
 <body>
 <div sec:authentication="name" style="float: right; color: dimgray; font-size: xx-large">
 </div>
-<div><form action="/logout" method="post">
-    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-    <input type="submit" value="Logout">
-</form></div>
-<table>
+<div>
+    <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button"
+            style="width: 10%; float: left">Pradinis<img class="ikona" src="/img/home.png">
+    </button>
+</div>
+<div>
+    <form action="/logout" method="post">
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+        <input type="submit" value="Atsijungti">
+    </form>
+</div>
+<table class="table">
     <tr>
         <th>Miestas</th>
         <th>Data</th>
-        <th>Temperatura</th>
+        <th>Temperatūra</th>
+        <th>Oro sąlygos</th>
     </tr>
     <tr th:each="forecast : ${forecasts}">
         <td th:text="${forecast.city}"></td>
         <td th:text="${forecast.date}"></td>
         <td th:text="${forecast.temperature}"></td>
+        <td th:id="'condition-' + ${forecast.id}" th:text="${forecast.conditionCode}"></td>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            document.getElementById('condition-' + /*[[${forecast.id}]]*/ '').innerText =
+                verstiConditionCode(document.getElementById('condition-' + /*[[${forecast.id}]]*/ '').innerText);
+            /*]]>*/
+        </script>
     </tr>
 </table>
+<script>
+    function verstiConditionCode(conditionCode) {
+        switch (conditionCode) {
+            case "clear":
+                return "Giedra";
+            case "isolated-clouds":
+                return "Mažai debesuota";
+            case "scattered-clouds":
+                return "Debesuota su pragiedruliais";
+            case "overcast":
+                return "Debesuota";
+            case "light-rain":
+                return "Nedidelis lietus";
+            case "moderate-rain":
+                return "Lietus";
+            case "heavy-rain":
+                return "Smurtinis lietus";
+            case "sleet":
+                return "Šlapdriba";
+            case "light-snow":
+                return "Nedidelis sniegas";
+            case "moderate-snow":
+                return "Sniegas";
+            case "heavy-snow":
+                return "Smurtinis sniegas";
+            case "fog":
+                return "Rūkas";
+            case "na":
+                return "Nėra duomenų";
+            default:
+                return "Nėra duomenų";
+        }
+        return
+    }
+</script>
 </body>
 </html>
+<script>
+    document.getElementsByTagName("button")[0].onclick = function () {
+        location.href = "/"
+    }
+</script>
