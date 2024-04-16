@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface ForecastRepository extends CrudRepository<ForecastEntity, Integer>{
+public interface ForecastRepository extends CrudRepository<ForecastEntity, Integer> {
     List<ForecastEntity> findAll();
 
 

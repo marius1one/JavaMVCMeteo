@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class Prisijungimas {
     @GetMapping("/login")
     public String login() {
-        return "login";}
+        return "login";
+    }
 
 }

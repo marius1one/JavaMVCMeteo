@@ -38,27 +38,10 @@ public class ForecastService {
         return text;
     }
 
-    public static ArrayList<ForecastModel> getForecastsWithDate(String city, String date) throws IOException {
-        var forecasts = new ArrayList<ForecastModel>();
-
-        if (city != null && !city.equals("")) {
-            var meteoForecastsJson = GetMeteoForecastsJson(city);
-            Root meteoObj = GetObjectFromJson(meteoForecastsJson);
-            for (var item : meteoObj.forecastTimestamps) {
-                if (date == null || item.forecastTimeUtc.startsWith(date)) {
-                    var row = new ForecastModel(item.forecastTimeUtc, item.airTemperature, item.windSpeed, item.conditionCode);
-                    forecasts.add(row);
-                }
-            }
-        }
-
-        return forecasts;
-    }
-
     public ArrayList<ForecastModel> getForecasts(String city, String date, UserEntity user) throws IOException {
         var forecasts = new ArrayList<ForecastModel>();
 
-        if (city != null && !city.equals("")) {
+        if (city != null && !city.isEmpty()) {
             var meteoForecastsJson = GetMeteoForecastsJson(city);
             Root meteoObj = GetObjectFromJson(meteoForecastsJson);
             for (var item : meteoObj.forecastTimestamps) {

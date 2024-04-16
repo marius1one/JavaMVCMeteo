@@ -99,6 +99,7 @@
         .table tr:nth-child(odd) {
             animation: slideInFromRight 1s forwards;
         }
+
         .ikona {
             width: 20px;
             height: 20px;
@@ -146,35 +147,54 @@
         switch (conditionCode) {
             case "clear":
                 return "Giedra";
-            case "isolated-clouds":
+            case "partly-cloudy":
                 return "Mažai debesuota";
-            case "scattered-clouds":
+            case "cloudy-with-sunny-intervals":
                 return "Debesuota su pragiedruliais";
-            case "overcast":
+            case "cloudy":
                 return "Debesuota";
+            case "thunder":
+                return "Perkūnija";
+            case "isolated-thunderstorms":
+                return "Trumpas lietus su perkūnija";
+            case "thunderstorms":
+                return "Lietus su perkūnija";
+            case "heavy-rain-with-thunderstorms":
+                return "Smarkus lietus su perkūnija";
             case "light-rain":
                 return "Nedidelis lietus";
-            case "moderate-rain":
+            case "rain":
                 return "Lietus";
             case "heavy-rain":
-                return "Smurtinis lietus";
+                return "Smarkus lietus";
+            case "light-sleet":
+                return "Nedidelė šlapdriba";
             case "sleet":
                 return "Šlapdriba";
+            case "freezing-rain":
+                return "Lijundra";
+            case "hail":
+                return "Kruša";
             case "light-snow":
                 return "Nedidelis sniegas";
-            case "moderate-snow":
+            case "snow":
                 return "Sniegas";
             case "heavy-snow":
-                return "Smurtinis sniegas";
+                return "Smarkus sniegas";
             case "fog":
                 return "Rūkas";
-            case "na":
+            case "null":
                 return "Nėra duomenų";
             default:
                 return "Nėra duomenų";
         }
-        return
+
     }
+
+    var forecasts = document.querySelectorAll("[id^='condition-']");
+    forecasts.forEach(function (forecast) {
+        forecast.innerText = verstiConditionCode(forecast.innerText);
+    });
 </script>
 </body>
 </html>

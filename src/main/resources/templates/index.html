@@ -109,6 +109,7 @@
             object-fit: contain;
             margin-left: 5px;
         }
+
         .hidden {
             display: none;
         }
@@ -141,7 +142,7 @@
         .screen__background__shape2 {
             height: 220px;
             width: 220px;
-            background: rgba(161,62,151,1);
+            background: rgba(161, 62, 151, 1);
             top: -172px;
             right: 0;
             border-radius: 32px;
@@ -150,7 +151,7 @@
         .screen__background__shape3 {
             height: 540px;
             width: 190px;
-            background: linear-gradient(270deg, rgba(161,62,151,1), rgba(40,14,59,1));
+            background: linear-gradient(270deg, rgba(161, 62, 151, 1), rgba(40, 14, 59, 1));
             top: -24px;
             right: 0;
             border-radius: 32px;
@@ -159,13 +160,11 @@
         .screen__background__shape4 {
             height: 400px;
             width: 200px;
-            background: rgba(40,14,59,1);
+            background: rgba(40, 14, 59, 1);
             top: 420px;
             right: 50px;
             border-radius: 60px;
         }
-
-
 
 
     </style>
@@ -178,7 +177,7 @@
 <div class="container">
     <nav class="navbar">
         <div id="nav-left" class="btn-group d-grid gap-3 d-md-block" role="group"
-             >
+        >
             <button type="button" class="btn btn-outline-light" role="button">Orai didžiuosiuose miestuose
                 <img class="ikona" src="/img/miestas1.png"></button>
             <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Oras Dabar <img
@@ -240,7 +239,8 @@
             <td class="temperature" th:text="${forecast.temperature}"></td>
             <td th:text="${forecast.windSpeed}"></td>
             <td>
-                <button class="btn btn-light btn-sm save-button" th:if="${!forecast.alreadyExists}" onclick="save(this)">Save<img class="ikona" src="/img/save1.png">
+                <button class="btn btn-light btn-sm save-button" th:if="${!forecast.alreadyExists}"
+                        onclick="save(this)">Save<img class="ikona" src="/img/save1.png">
                 </button>
             </td>
         </tr>

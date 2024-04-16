@@ -1,4 +1,5 @@
 package com.example.javamvcmeteo.service;
+
 import com.example.javamvcmeteo.entities.UserEntity;
 import com.example.javamvcmeteo.models.AppUserPrincipal;
 import com.example.javamvcmeteo.repository.UserRepository;

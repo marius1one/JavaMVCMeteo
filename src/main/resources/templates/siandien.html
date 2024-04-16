@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Siandien</title>
@@ -8,18 +9,19 @@
     <style>
 
         body {
-            background: rgb(40,14,59);
-            background: linear-gradient(0deg, rgba(40,14,59,1) 0%, rgba(161,62,151,1) 100%);
+            /*background: rgb(40,14,59);
+            background: linear-gradient(0deg, rgba(40,14,59,1) 0%, rgba(161,62,151,1) 100%);*/
             display: flex;
             overflow: hidden;
+            background-size: cover;
+
 
         }
 
 
-
         div {
             margin: 0 auto auto;
-color: #d3b7d8;
+            /*color: #d3b7d8;*/
         }
 
         select {
@@ -39,14 +41,11 @@ color: #d3b7d8;
             display: flex;
             align-items: center;
             width: 100%;
-            color: rgba(40,14,59,1);
+            color: rgba(40, 14, 59, 1);
             box-shadow: 0px 2px 2px #5C5696;
             cursor: pointer;
             transition: .2s;
         }
-
-
-
 
 
         .login__submit:active,
@@ -61,6 +60,7 @@ color: #d3b7d8;
             margin-left: auto;
             color: #7875B5;
         }
+
         .ikona {
             width: 20px;
             height: 20px;
@@ -68,15 +68,41 @@ color: #d3b7d8;
             margin-left: 5px;
         }
 
+        .vidurys {
+            width: 50%;
+            margin-top: 50px;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sonai {
+            height: 98vh;
+            margin-top: 7px;
+            width: 15%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
     </style>
 </head>
-<body>
+<body id="body">
 
-<div style="height: 98vh;
- width: 15%;
- display: flex;
- flex-direction: column;
- justify-content: space-between;">
+<div class="sonai">
+    <div>
+        <p th:text="${indexModel.forecasts.get(0).dateTime}"></p>
+        <p th:text="${indexModel.forecasts.get(0).temperature}">Temperatura</p>
+        <p th:text="${indexModel.forecasts.get(0).windSpeed}">Vejo greitis</p>
+    </div>
     <div>
         <p th:text="${indexModel.forecasts.get(1).dateTime}"></p>
         <p th:text="${indexModel.forecasts.get(1).temperature}">Temperatura</p>
@@ -93,11 +119,6 @@ color: #d3b7d8;
         <p th:text="${indexModel.forecasts.get(3).windSpeed}">Vejo greitis</p>
     </div>
     <div>
-        <p th:text="${indexModel.forecasts.get(4).dateTime}"></p>
-        <p th:text="${indexModel.forecasts.get(4).temperature}">Temperatura</p>
-        <p th:text="${indexModel.forecasts.get(4).windSpeed}">Vejo greitis</p>
-    </div>
-    <div>
         <p th:text="${indexModel.forecasts.get(5).dateTime}"></p>
         <p th:text="${indexModel.forecasts.get(5).temperature}">Temperatura</p>
         <p th:text="${indexModel.forecasts.get(5).windSpeed}">Vejo greitis</p>
@@ -108,22 +129,20 @@ color: #d3b7d8;
         <p th:text="${indexModel.forecasts.get(6).windSpeed}">Vejo greitis</p>
     </div>
 </div>
-<div  style="width: 70%;
-height: 100vh;
- display: flex;
-    flex-direction: column;
+<div class="vidurys">
 
-}">
-
-    <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button" style="width: 10%; float: left">Pradinis<img class="ikona" src="/img/home.png"></button>
+    <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button"
+            style="width: 10%; float: left">Pradinis<img class="ikona" src="/img/home.png"></button>
     <div sec:authentication="name" style="float: right; color: whitesmoke; font-size: xx-large"></div>
-    <div><form action="/logout" method="post">
-        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-        <button class="button login__submit" type="submit">
-            <span class="button__text">Atsijungti</span>
-            <i class="button__icon fas fa-chevron-right"></i>
-        </button>
-    </form></div>
+    <div>
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+            <button class="button login__submit" type="submit">
+                <span class="button__text">Atsijungti</span>
+                <i class="button__icon fas fa-chevron-right"></i>
+            </button>
+        </form>
+    </div>
     <div>
 
         <form method="get">
@@ -145,24 +164,21 @@ height: 100vh;
     <div style="margin-top: 10px">
         <h1 th:text="${indexModel.city}" style=" font-size: xxx-large"></h1></div>
 
-    <div><h1 ><span>Temperatura</span>
-        <span>Temperatura</span>
+    <div><h1><span>Temperatūra</span>
+
+
     </h1></div>
 
 
-    <div ><h2 th:text="${indexModel.forecasts.get(0).temperature}" style="font-size: xxx-large"></h2></div>
+    <div><h2 th:text="${indexModel.forecasts.get(4).temperature}" style="font-size: xxx-large"></h2></div>
 
 
-    <div ><h2>Vejo greitis</h2></div>
-    <div th:text="${indexModel.forecasts.get(0).windSpeed}"
+    <div><h2>Vejo greitis</h2></div>
+    <div th:text="${indexModel.forecasts.get(4).windSpeed}"
          style=" margin-top: 10px;font-size: xx-large"></div>
 </div>
 
-<div style="height: 98vh;
- width: 15%;
- display: flex;
- flex-direction: column;
- justify-content: space-between;">
+<div class="sonai">
 
     <div>
         <p th:text="${indexModel.forecasts.get(7).dateTime}"></p>
@@ -196,10 +212,46 @@ height: 100vh;
     </div>
 </div>
 
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function updateBackgroundImage(conditionCode) {
+        var body = document.getElementById('body');
+        switch (conditionCode) {
+            case 'rain':
+                body.style.backgroundImage = "url('/img/rain.jpg')";
+                break;
+            case 'light-rain':
+                body.style.backgroundImage = "url('/img/light-rain.jpg')";
+                break;
+            case 'cloudy':
+                body.style.backgroundImage = "url('/img/cloudy.jpg')";
+                break;
+            case 'clear':
+                body.style.backgroundImage = "url('/img/clear.jpg')";
+
+                break;
+
+            default:
+                body.style.backgroundImage = "url('/images/default.jpg')";
+        }
+    }
+
+    var conditionCode = /*[[${indexModel.forecasts[4].conditionCode}]]*/ 'defaultConditionCode';
+    updateBackgroundImage(conditionCode);
+    /*]]>*/
+</script>
+
+<script>
+    document.getElementsByName("city")[0].onchange = function () {
+        this.form.submit();
+        var conditionCode = /*[[${indexModel.forecasts[4].conditionCode}]]*/ 'defaultConditionCode';
+        updateBackgroundImage(conditionCode);
+    }
+</script>
 
 </body>
 <script>
-    document.getElementsByTagName("button")[0].onclick=function (){
+    document.getElementsByTagName("button")[0].onclick = function () {
         location.href = "/"
     }
 </script>

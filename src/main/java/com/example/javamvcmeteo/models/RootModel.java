@@ -10,7 +10,8 @@ public class RootModel {
         this.name = name;
     }
 
-    public RootModel(){}
+    public RootModel() {
+    }
 
     public RootModel(String code, String name, String administrativeDivision, String countryCode) {
         this.code = code;

@@ -29,7 +29,8 @@ public class WebSecurityConfig {
                 )
                 .logout(LogoutConfigurer::permitAll).sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                );;
+                );
+        ;
 
         return http.build();
     }
@@ -39,7 +40,6 @@ public class WebSecurityConfig {
         var passwordEncoder = new MessageDigestPasswordEncoder("SHA1");
         return passwordEncoder;
     }
-
 
 
 }

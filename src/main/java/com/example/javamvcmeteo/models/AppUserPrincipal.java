@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class AppUserPrincipal implements UserDetails {
     private Optional<UserEntity> user;
+
     public AppUserPrincipal(Optional<UserEntity> user) {
         this.user = user;
     }

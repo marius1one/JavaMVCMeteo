@@ -6,7 +6,4 @@ public class IndexModel {
     public String city;
     public String date;
     public ArrayList<ForecastModel> forecasts;
-
-
-
 }

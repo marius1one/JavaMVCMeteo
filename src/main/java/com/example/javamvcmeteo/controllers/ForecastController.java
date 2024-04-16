@@ -59,7 +59,7 @@ public class ForecastController {
         var indexModel = new IndexModel();
         indexModel.city = city;
 
-        if (indexModel.city == null || indexModel.city.equals("")) {
+        if (indexModel.city == null || indexModel.city.isEmpty()) {
             city = "vilnius";
             indexModel.city = "Vilnius";
         }

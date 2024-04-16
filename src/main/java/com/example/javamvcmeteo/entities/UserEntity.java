@@ -15,7 +15,6 @@ public class UserEntity {
     public String role;
 
 
-
     public String getUsername() {
         return username;
     }
