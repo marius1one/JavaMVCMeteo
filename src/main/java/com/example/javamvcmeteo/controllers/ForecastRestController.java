@@ -6,7 +6,6 @@ import com.example.javamvcmeteo.models.ForecastSaveModel;
 import com.example.javamvcmeteo.repository.ForecastRepository;
 import com.example.javamvcmeteo.repository.UserRepository;
 import com.example.javamvcmeteo.service.ForecastService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,10 +16,13 @@ import java.io.IOException;
 
 @RestController
 public class ForecastRestController {
-    @Autowired
-    private ForecastRepository forecastRepository;
-    @Autowired
-    private UserRepository userRepository;
+    private final ForecastRepository forecastRepository;
+    private final UserRepository userRepository;
+
+    public ForecastRestController(ForecastRepository forecastRepository, UserRepository userRepository) {
+        this.forecastRepository = forecastRepository;
+        this.userRepository = userRepository;
+    }
 
     @PostMapping("/saveData")
     public void saveData(@RequestBody ForecastSaveModel model) throws IOException {

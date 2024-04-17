@@ -2,7 +2,6 @@ package com.example.javamvcmeteo.controllers;
 
 import com.example.javamvcmeteo.entities.UserEntity;
 import com.example.javamvcmeteo.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RegistrationController {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping("/register")
     public String registerForm() {

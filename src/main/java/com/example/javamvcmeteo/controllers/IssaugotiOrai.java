@@ -4,7 +4,6 @@ import com.example.javamvcmeteo.entities.ForecastEntity;
 import com.example.javamvcmeteo.entities.UserEntity;
 import com.example.javamvcmeteo.repository.ForecastRepository;
 import com.example.javamvcmeteo.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -15,10 +14,13 @@ import java.util.List;
 
 @Controller
 public class IssaugotiOrai {
-    @Autowired
-    private ForecastRepository forecastRepository;
-    @Autowired
-    private UserRepository userRepository;
+    private final ForecastRepository forecastRepository;
+    private final UserRepository userRepository;
+
+    public IssaugotiOrai(ForecastRepository forecastRepository, UserRepository userRepository) {
+        this.forecastRepository = forecastRepository;
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/issaugotiOrai")
     public String rodytiIssaugotusOrus(Model model) {

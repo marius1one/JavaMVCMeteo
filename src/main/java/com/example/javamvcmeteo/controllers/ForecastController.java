@@ -1,11 +1,9 @@
 package com.example.javamvcmeteo.controllers;
 
 import com.example.javamvcmeteo.entities.UserEntity;
-import com.example.javamvcmeteo.models.ForecastModel;
 import com.example.javamvcmeteo.models.IndexModel;
 import com.example.javamvcmeteo.repository.UserRepository;
 import com.example.javamvcmeteo.service.ForecastService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,10 +17,15 @@ import java.io.IOException;
 @RestController
 @CrossOrigin(origins = "http://localhost:5173/")
 public class ForecastController {
-    @Autowired
+    final
     ForecastService forecastService;
-    @Autowired
+    final
     UserRepository userRepository;
+
+    public ForecastController(ForecastService forecastService, UserRepository userRepository) {
+        this.forecastService = forecastService;
+        this.userRepository = userRepository;
+    }
 
 
     private UserEntity getCurrentUser() {
@@ -43,10 +46,9 @@ public class ForecastController {
         indexModel.date = date;
 
         UserEntity currentUser = getCurrentUser();
-        var forecasts = forecastService.getForecasts(city, date, currentUser);
 
 
-        indexModel.forecasts = forecasts;
+        indexModel.forecasts = forecastService.getForecasts(city, date, currentUser);
 
 
         modelAndView.addObject("indexModel", indexModel);
@@ -65,14 +67,9 @@ public class ForecastController {
             city = "vilnius";
             indexModel.city = "Vilnius";
         }
-        var forecasts = forecastService.getForecastsVilnius(city);
 
 
-        indexModel.forecasts = forecasts;
-        ForecastModel forecastModel;
-
-        forecastModel = new ForecastModel(indexModel.forecasts.get(0).dateTime, indexModel.forecasts.get(0).temperature,
-                indexModel.forecasts.get(0).windSpeed, indexModel.forecasts.get(0).conditionCode);
+        indexModel.forecasts = forecastService.getForecastsVilnius(city);
 
 
         modelAndView.addObject("indexModel", indexModel);

@@ -59,8 +59,7 @@ public class ForecastService {
 
     private static Root GetObjectFromJson(String json) throws JsonProcessingException {
         ObjectMapper om = new ObjectMapper();
-        Root meteoObj = om.readValue(json, Root.class);
-        return meteoObj;
+        return om.readValue(json, Root.class);
     }
 
     public static String getTemperature(String city, String date) throws IOException {

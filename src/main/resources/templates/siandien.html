@@ -133,7 +133,7 @@
 
     <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button"
             style="width: 10%; float: left">Pradinis<img class="ikona" src="/img/home.png"></button>
-    <div sec:authentication="name" style="float: right; color: whitesmoke; font-size: xx-large"></div>
+    <div class="username" sec:authentication="name" style="float: right; color: whitesmoke; font-size: xx-large"></div>
     <div>
         <form action="/logout" method="post">
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
@@ -219,9 +219,17 @@
         switch (conditionCode) {
             case 'rain':
                 body.style.backgroundImage = "url('/img/rain.jpg')";
+                document.querySelectorAll("p").forEach(p => p.style.color = "white");
+                document.querySelectorAll("p").forEach(p => p.style.textShadow =
+                    "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black");
+                document.getElementsByClassName("username")[0].style.textShadow =
+                    "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
+                document.getElementsByTagName("button")[0].style.textShadow =
+                    "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
                 break;
             case 'light-rain':
                 body.style.backgroundImage = "url('/img/lightrain.jpg')";
+
                 break;
             case 'cloudy':
                 body.style.backgroundImage = "url('/img/cloudy.jpg')";

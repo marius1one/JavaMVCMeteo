@@ -30,7 +30,6 @@ public class WebSecurityConfig {
                 .logout(LogoutConfigurer::permitAll).sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 );
-        ;
 
         return http.build();
     }

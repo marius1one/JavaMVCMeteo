@@ -15,7 +15,6 @@ public class ForecastEntity  {
 
     public String temperature;
     public String conditionCode;
-    boolean alreadyExists;
     @ManyToOne
     private UserEntity user;
     public ForecastEntity() {
