@@ -134,7 +134,7 @@
         height: 90%;
         display: flex;
         justify-content: center;
-        margin: 0px 10px 0 30px;
+        margin: 0 10px 0 30px;
         align-items: center;
         font-size: medium;
         color: white;
@@ -166,7 +166,7 @@
 <div class="vidurys">
 
     <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button"
-    >Pradinis<img class="ikona" src="/img/home.png"></button>
+    >Pradinis<img class="ikona" src="/img/home.png" alt="icon"></button>
     <div class="userLogout">
         <div class="username" sec:authentication="name" style=" color:whitesmoke; font-size: xx-large"></div>
         <div>
@@ -310,7 +310,7 @@
 
     }
 
-    var forecasts = document.querySelectorAll("[id^='condition-']");
+    const forecasts = document.querySelectorAll("[id^='condition-']");
     forecasts.forEach(function (forecast) {
         forecast.innerText = verstiConditionCode(forecast.innerText);
     });

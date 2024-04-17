@@ -175,7 +175,7 @@
             top: 0;
             right: 0;
             z-index:2;
-            margin: 0px 200px 50px 0;
+            margin: 0 200px 50px 0;
         }
     </style>
 </head>
@@ -193,7 +193,7 @@
     </div>
 <div>
     <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button"
-            style="width: 10%; float: left">Pradinis<img class="ikona" src="/img/home.png">
+            style="width: 10%; float: left">Pradinis<img class="ikona" src="/img/home.png" alt="homeIcon">
     </button>
 </div>
 
@@ -270,7 +270,7 @@
 
     }
 
-    var forecasts = document.querySelectorAll("[id^='condition-']");
+    let forecasts = document.querySelectorAll("[id^='condition-']");
     forecasts.forEach(function (forecast) {
         forecast.innerText = verstiConditionCode(forecast.innerText);
     });

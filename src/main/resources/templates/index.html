@@ -88,7 +88,7 @@
             align-items: center;
             width: 100%;
             color: rgba(40, 14, 59, 1);
-            box-shadow: 0px 2px 2px #5C5696;
+            box-shadow: 0 2px 2px #5C5696;
             cursor: pointer;
             transition: .2s;
         }
@@ -183,15 +183,15 @@
         <div id="nav-left" class="btn-group d-grid gap-3 d-md-block" role="group"
         >
             <button type="button" class="btn btn-outline-light" role="button">Orai didžiuosiuose miestuose
-                <img class="ikona" src="/img/miestas1.png"></button>
+                <img class="ikona" src="/img/miestas1.png" alt="cityIcon"></button>
             <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Oras Dabar <img
-                    class="ikona" src="/img/saule.png"></button>
+                    class="ikona" src="/img/saule.png" alt="sunIcon"></button>
             <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Rytoj<img
-                    class="ikona" src="/img/tomorrow.png"></button>
+                    class="ikona" src="/img/tomorrow.png" alt="tomorrowIcon"></button>
             <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Savaitės orai<img
-                    class="ikona" src="/img/week-icon.png"></button>
+                    class="ikona" src="/img/week-icon.png" alt="calendarIcon"></button>
             <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Išsaugoti orai<img
-                    class="ikona" src="/img/saved.png"></button>
+                    class="ikona" src="/img/saved.png" alt="savedIcon"></button>
         </div>
         <div class="nav-right">
 
@@ -244,7 +244,7 @@
             <td th:text="${forecast.windSpeed}"></td>
             <td>
                 <button class="btn btn-light btn-sm save-button" th:if="${!forecast.alreadyExists}"
-                        onclick="save(this)">Save<img class="ikona" src="/img/save1.png">
+                        onclick="save(this)">Save<img class="ikona" src="/img/save1.png" alt="saveIcon">
                 </button>
             </td>
         </tr>
@@ -270,12 +270,12 @@
 </script>
 <script>
     function save(element) {
-        var parent = element.parentElement.parentElement;
-        var date = parent.getElementsByClassName('date')[0].textContent;
-        var temperature = parent.getElementsByClassName('temperature')[0].textContent;
-        var selectElement = document.getElementsByName('city')[0];
-        var city = selectElement.value;
-        var data = {
+        let parent = element.parentElement.parentElement;
+        let date = parent.getElementsByClassName('date')[0].textContent;
+        let temperature = parent.getElementsByClassName('temperature')[0].textContent;
+        let selectElement = document.getElementsByName('city')[0];
+        let city = selectElement.value;
+        let data = {
             "dateTime": date,
             "city": city,
             "temperature": temperature

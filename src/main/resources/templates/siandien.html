@@ -42,7 +42,7 @@
             align-items: center;
             width: 100%;
             color: rgba(40, 14, 59, 1);
-            box-shadow: 0px 2px 2px #5C5696;
+            box-shadow: 0 2px 2px #5C5696;
             cursor: pointer;
             transition: .2s;
         }
@@ -139,7 +139,7 @@
 <div class="vidurys">
 
     <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button"
-            style="width: 10%; float: left">Pradinis<img class="ikona" src="/img/home.png"></button>
+            style="width: 10%; float: left">Pradinis<img class="ikona" src="/img/home.png" alt="homeIcon"></button>
 
     <div class="userLogout">
     <div class="username" sec:authentication="name" style="float: right; color: whitesmoke; font-size: xx-large"></div>
@@ -240,7 +240,7 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
     function updateBackgroundImage(conditionCode) {
-        var body = document.getElementById('body');
+        let body = document.getElementById('body');
         switch (conditionCode) {
             case 'rain':
                 body.style.backgroundImage = "url('/img/rain.jpg')";
@@ -276,7 +276,7 @@
         }
     }
 
-    var conditionCode = /*[[${indexModel.forecasts[4].conditionCode}]]*/ 'defaultConditionCode';
+    let conditionCode = /*[[${indexModel.forecasts[4].conditionCode}]]*/ 'defaultConditionCode';
     updateBackgroundImage(conditionCode);
     /*]]>*/
 </script>
@@ -284,7 +284,7 @@
 <script>
     document.getElementsByName("city")[0].onchange = function () {
         this.form.submit();
-        var conditionCode = /*[[${indexModel.forecasts[4].conditionCode}]]*/ 'defaultConditionCode';
+        let conditionCode = /*[[${indexModel.forecasts[4].conditionCode}]]*/ 'defaultConditionCode';
         updateBackgroundImage(conditionCode);
     }
 </script>
@@ -338,7 +338,7 @@
 
     }
 
-    var forecasts = document.querySelectorAll("[id^='condition-']");
+    let forecasts = document.querySelectorAll("[id^='condition-']");
     forecasts.forEach(function (forecast) {
         forecast.innerText = verstiConditionCode(forecast.innerText);
     });

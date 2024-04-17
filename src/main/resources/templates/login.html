@@ -30,7 +30,7 @@
             position: relative;
             height: 600px;
             width: 360px;
-            box-shadow: 0px 0px 24px rgba(161, 62, 151, 1);
+            box-shadow: 0 0 24px rgba(161, 62, 151, 1);
         }
 
         .screen__content {
@@ -105,7 +105,7 @@
         }
 
         .login__field {
-            padding: 20px 0px;
+            padding: 20px 0;
             position: relative;
         }
 
@@ -145,7 +145,7 @@
             align-items: center;
             width: 100%;
             color: rgba(40, 14, 59, 1);
-            box-shadow: 0px 2px 2px #5C5696;
+            box-shadow: 0 2px 2px #5C5696;
             cursor: pointer;
             transition: .2s;
         }
@@ -164,41 +164,15 @@
             color: #7875B5;
         }
 
-        .social-login {
-            position: absolute;
-            height: 140px;
-            width: 160px;
-            text-align: center;
-            bottom: 0px;
-            right: 0px;
-            color: #fff;
-        }
-
-        .social-icons {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .social-login__icon {
-            padding: 20px 10px;
-            color: #fff;
-            text-decoration: none;
-            text-shadow: 0px 0px 8px #7875B5;
-        }
-
-        .social-login__icon:hover {
-            transform: scale(1.5);
-        }
     </style>
     <script>
         window.onload = function () {
-            var loginButton = document.querySelector('.button.login__submit');
-            var computedStyle = window.getComputedStyle(loginButton);
-            var width = computedStyle.width;
-            var height = computedStyle.height;
+            let loginButton = document.querySelector('.button.login__submit');
+            let computedStyle = window.getComputedStyle(loginButton);
+            let width = computedStyle.width;
+            let height = computedStyle.height;
 
-            var registerButton = document.querySelector('.button.login__submit.register-button');
+            let registerButton = document.querySelector('.button.login__submit.register-button');
             registerButton.style.width = width;
             registerButton.style.height = height;
         }

@@ -5,8 +5,8 @@
     <title>Registracija</title>
     <script>
         function validateForm() {
-            var password = document.getElementById("password").value;
-            var confirmPassword = document.getElementById("confirmPassword").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
             if (password !== confirmPassword) {
                 alert("Slaptazodziai nesutampa!");
                 return false;
@@ -41,7 +41,7 @@
             position: relative;
             height: 600px;
             width: 360px;
-            box-shadow: 0px 0px 24px rgba(161, 62, 151, 1);
+            box-shadow: 0 0 24px rgba(161, 62, 151, 1);
         }
 
         .screen__content {
@@ -75,7 +75,7 @@
         }
 
         .login__field {
-            padding: 20px 0px;
+            padding: 20px 0;
             position: relative;
         }
 
@@ -116,7 +116,7 @@
             align-items: center;
             width: 100%;
             color: rgba(40, 14, 59, 1);
-            box-shadow: 0px 2px 2px #5C5696;
+            box-shadow: 0 2px 2px #5C5696;
             cursor: pointer;
             transition: .2s;
         }
@@ -220,8 +220,8 @@
 
 </html>
 <script>function validateForm() {
-    var password = document.getElementById("password").value;
-    var confirmPassword = document.getElementById("confirmPassword").value;
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
     if (password !== confirmPassword) {
         alert("Ivesti slaptazodziai nesutampa!");
         return false;
