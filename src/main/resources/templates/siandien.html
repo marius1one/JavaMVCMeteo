@@ -71,14 +71,21 @@
         .vidurys {
             width: 50%;
             margin-top: 50px;
-            height: 70vh;
+            height: 80vh;
             display: flex;
             flex-direction: column;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
         }
+        .userLogout {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
 
         .sonai {
             height: 98vh;
@@ -133,6 +140,8 @@
 
     <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button"
             style="width: 10%; float: left">Pradinis<img class="ikona" src="/img/home.png"></button>
+
+    <div class="userLogout">
     <div class="username" sec:authentication="name" style="float: right; color: whitesmoke; font-size: xx-large"></div>
     <div>
         <form action="/logout" method="post">
@@ -142,6 +151,7 @@
                 <i class="button__icon fas fa-chevron-right"></i>
             </button>
         </form>
+    </div>
     </div>
     <div>
 
@@ -173,9 +183,24 @@
     <div><h2 th:text="${indexModel.forecasts.get(4).temperature}" style="font-size: xxx-large"></h2></div>
 
 
-    <div><h2>Vejo greitis</h2></div>
+    <div>
+        <h2>Vejo greitis</h2></div>
     <div th:text="${indexModel.forecasts.get(4).windSpeed}"
          style=" margin-top: 10px;font-size: xx-large"></div>
+
+    <div>
+        <h2>Oro sąlygos</h2>
+    </div>
+    <div style="font-size: xx-large" th:id="'condition-' + ${indexModel.forecasts.get(4).conditionCode}" th:text="${indexModel.forecasts.get(4).conditionCode}">
+
+    </div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.getElementById('condition-' + /*[[${indexModel.forecasts.get(4).conditionCode}]]*/ '').innerText =
+            verstiConditionCode(document.getElementById('condition-' + /*[[${indexModel.forecasts.get(4).conditionCode}]]*/ '').innerText);
+        /*]]>*/
+    </script>
+
 </div>
 
 <div class="sonai">
@@ -257,6 +282,61 @@
         var conditionCode = /*[[${indexModel.forecasts[4].conditionCode}]]*/ 'defaultConditionCode';
         updateBackgroundImage(conditionCode);
     }
+</script>
+
+<script>
+    function verstiConditionCode(conditionCode) {
+        switch (conditionCode) {
+            case "clear":
+                return "Giedra";
+            case "partly-cloudy":
+                return "Mažai debesuota";
+            case "cloudy-with-sunny-intervals":
+                return "Debesuota su pragiedruliais";
+            case "cloudy":
+                return "Debesuota";
+            case "thunder":
+                return "Perkūnija";
+            case "isolated-thunderstorms":
+                return "Trumpas lietus su perkūnija";
+            case "thunderstorms":
+                return "Lietus su perkūnija";
+            case "heavy-rain-with-thunderstorms":
+                return "Smarkus lietus su perkūnija";
+            case "light-rain":
+                return "Nedidelis lietus";
+            case "rain":
+                return "Lietus";
+            case "heavy-rain":
+                return "Smarkus lietus";
+            case "light-sleet":
+                return "Nedidelė šlapdriba";
+            case "sleet":
+                return "Šlapdriba";
+            case "freezing-rain":
+                return "Lijundra";
+            case "hail":
+                return "Kruša";
+            case "light-snow":
+                return "Nedidelis sniegas";
+            case "snow":
+                return "Sniegas";
+            case "heavy-snow":
+                return "Smarkus sniegas";
+            case "fog":
+                return "Rūkas";
+            case "null":
+                return "Nėra duomenų";
+            default:
+                return "Nėra duomenų";
+        }
+
+    }
+
+    var forecasts = document.querySelectorAll("[id^='condition-']");
+    forecasts.forEach(function (forecast) {
+        forecast.innerText = verstiConditionCode(forecast.innerText);
+    });
 </script>
 
 </body>

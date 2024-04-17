@@ -79,14 +79,24 @@ public class ForecastController {
 
     @GetMapping("/oraiDidziuosiuoseMiestuose")
 
-    public ModelAndView oraiDidziuosiuoseMiestuose() {
+    public ModelAndView oraiDidziuosiuoseMiestuose() throws IOException {
         ModelAndView modelAndView = new ModelAndView("oraiDidziuosiuoseMiestuose");
         var indexModel = new IndexModel();
         var indexModel1 = new IndexModel();
         var indexModel2 = new IndexModel();
-        indexModel.city = "vilnius";
-        indexModel1.city = "kaunas";
-        indexModel2.city = "klaipeda";
+        indexModel.city = "Vilnius";
+        indexModel.forecasts = forecastService.getForecastsVilnius(indexModel.city);
+
+        indexModel1.city = "Kaunas";
+        indexModel1.forecasts = forecastService.getForecastsVilnius(indexModel1.city);
+
+        indexModel2.city = "Klaipeda";
+        indexModel2.forecasts = forecastService.getForecastsVilnius(indexModel2.city);
+
+        modelAndView.addObject("indexModel", indexModel);
+        modelAndView.addObject("indexModel1", indexModel1);
+        modelAndView.addObject("indexModel2", indexModel2);
+
         return modelAndView;
     }
 

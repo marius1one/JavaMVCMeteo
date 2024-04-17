@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Orai didziuosiuose miestuose</title>
@@ -16,14 +17,304 @@
 
     button {
         height: 5%;
-        width: 10%;
+        width: 100%;
+        background-color: rgba(161, 62, 151, 1);
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        margin: 10px;
+
     }
+
+    button:hover {
+        background-color: rgba(40, 14, 59, 1);
+        color: rgb(255, 255, 255);
+    }
+
+    .ikona {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        margin-left: 5px;
+    }
+
+    .screen__background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        -webkit-clip-path: inset(0 0 0 0);
+        clip-path: inset(0 0 0 0);
+    }
+
+    .screen__background__shape {
+        transform: rotate(45deg);
+        position: absolute;
+    }
+
+    .screen__background__shape1 {
+        height: 520px;
+        width: 520px;
+        background: #FFF;
+        top: -50px;
+        right: 120px;
+        border-radius: 0 72px 0 0;
+    }
+
+    .screen__background__shape2 {
+        height: 220px;
+        width: 220px;
+        background: rgba(161, 62, 151, 1);
+        top: -172px;
+        right: 0;
+        border-radius: 32px;
+    }
+
+    .screen__background__shape3 {
+        height: 540px;
+        width: 190px;
+        background: linear-gradient(270deg, rgba(161, 62, 151, 1), rgba(40, 14, 59, 1));
+        top: -24px;
+        right: 0;
+        border-radius: 32px;
+    }
+
+    .screen__background__shape4 {
+        height: 400px;
+        width: 200px;
+        background: rgba(40, 14, 59, 1);
+        top: 420px;
+        right: 50px;
+        border-radius: 60px;
+    }
+
+    .vidurys {
+        position: fixed;
+        top: 0;
+        width: 60%;
+        height: 10%;
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 20%; /* center the navbar */
+        background-color: rgba(108, 0, 126, 0.5);
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .btn.btn-outline-light {
+        width: 15%;
+        height: 65%;
+        align-self: flex-start;
+    }
+
+    .userLogout {
+        display: inline-flex;
+        padding-right: 20px;
+    }
+
+    .konteineris {
+        display: flex;
+        flex-direction: row;
+        width: 90%;
+        margin: 10% auto 5%;
+        align-items: center;
+
+    }
+
+    .konteineris > div {
+        width: 33.3%;
+        height: 90%;
+        display: flex;
+        justify-content: center;
+        margin: 0px 10px 0 30px;
+        align-items: center;
+        font-size: medium;
+        color: white;
+        background-color: rgba(108, 0, 126, 0.5);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+    }
+
+    .konteineris > div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .konteineris > div > div {
+        flex: 1;
+        text-align: center;
+    }
+
+
     </style>
 </head>
-<body>
-<button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button"
-        style="width: 10%; float: left">Pradinis
-</button>
+<body class="screen__background">
+
+<span class="screen__background__shape screen__background__shape4"></span>
+<span class="screen__background__shape screen__background__shape3"></span>
+<span class="screen__background__shape screen__background__shape2"></span>
+<span class="screen__background__shape screen__background__shape1"></span>
+
+<div class="vidurys">
+
+    <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button"
+    >Pradinis<img class="ikona" src="/img/home.png"></button>
+    <div class="userLogout">
+        <div class="username" sec:authentication="name" style=" color:whitesmoke; font-size: xx-large"></div>
+        <div>
+            <form action="/logout" method="post">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <button class="button login__submit" type="submit">
+                    <span class="button__text">Atsijungti</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="konteineris">
+    <div class="vilnius"><h1>Vilnius</h1>
+        <div>
+            <p th:text="${indexModel.forecasts.get(4).dateTime}"></p>
+            <div>
+                <p>Temperatūra</p>
+                <p th:text="${indexModel.forecasts.get(4).temperature}"></p>
+            </div>
+
+            <div>
+                <p>Vėjo greitis</p>
+                <p th:text="${indexModel.forecasts.get(4).windSpeed}"></p>
+            </div>
+
+            <div>
+                <p>Oro sąlygos</p>
+                <p th:id="'condition-' + ${indexModel.city}" th:text="${indexModel.forecasts.get(4).conditionCode}"></p>
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    document.getElementById('condition-' + /*[[${indexModel2.city}]]*/ '').innerText =
+                        verstiConditionCode(document.getElementById('condition-' + /*[[${indexModel.city}]]*/ '').innerText);
+                    /*]]>*/
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="kaunas"><h1>Kaunas</h1>
+        <div>
+            <p th:text="${indexModel1.forecasts.get(4).dateTime}"></p>
+
+            <div>
+                <p>Temperatūra</p>
+                <p th:text="${indexModel1.forecasts.get(4).temperature}"></p>
+            </div>
+
+            <div>
+                <p>Vėjo greitis</p>
+                <p th:text="${indexModel1.forecasts.get(4).windSpeed}"></p>
+            </div>
+
+            <div>
+                <p>Oro sąlygos</p>
+                <p th:id="'condition-' + ${indexModel1.city}" th:text="${indexModel1.forecasts.get(4).conditionCode}"></p>
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    document.getElementById('condition-' + /*[[${indexModel2.city}]]*/ '').innerText =
+                        verstiConditionCode(document.getElementById('condition-' + /*[[${indexModel.city}]]*/ '').innerText);
+                    /*]]>*/
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="klapeida"><h1>Klaipėda</h1>
+        <div>
+
+            <p th:text="${indexModel2.forecasts.get(4).dateTime}"></p>
+            <div>
+                <p>Temperatūra</p>
+                <p th:text="${indexModel2.forecasts.get(4).temperature}"></p>
+            </div>
+
+            <div>
+                <p>Vėjo greitis</p>
+                <p th:text="${indexModel2.forecasts.get(4).windSpeed}"></p>
+            </div>
+
+            <div>
+                <p>Oro sąlygos</p>
+                <p th:id="'condition-' + ${indexModel2.city}" th:text="${indexModel2.forecasts.get(4).conditionCode}"></p>
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    document.getElementById('condition-' + /*[[${indexModel2.city}]]*/ '').innerText =
+                        verstiConditionCode(document.getElementById('condition-' + /*[[${indexModel.city}]]*/ '').innerText);
+                    /*]]>*/
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function verstiConditionCode(conditionCode) {
+        switch (conditionCode) {
+            case "clear":
+                return "Giedra";
+            case "partly-cloudy":
+                return "Mažai debesuota";
+            case "cloudy-with-sunny-intervals":
+                return "Debesuota su pragiedruliais";
+            case "cloudy":
+                return "Debesuota";
+            case "thunder":
+                return "Perkūnija";
+            case "isolated-thunderstorms":
+                return "Trumpas lietus su perkūnija";
+            case "thunderstorms":
+                return "Lietus su perkūnija";
+            case "heavy-rain-with-thunderstorms":
+                return "Smarkus lietus su perkūnija";
+            case "light-rain":
+                return "Nedidelis lietus";
+            case "rain":
+                return "Lietus";
+            case "heavy-rain":
+                return "Smarkus lietus";
+            case "light-sleet":
+                return "Nedidelė šlapdriba";
+            case "sleet":
+                return "Šlapdriba";
+            case "freezing-rain":
+                return "Lijundra";
+            case "hail":
+                return "Kruša";
+            case "light-snow":
+                return "Nedidelis sniegas";
+            case "snow":
+                return "Sniegas";
+            case "heavy-snow":
+                return "Smarkus sniegas";
+            case "fog":
+                return "Rūkas";
+            case "null":
+                return "Nėra duomenų";
+            default:
+                return "Nėra duomenų";
+        }
+
+    }
+
+    var forecasts = document.querySelectorAll("[id^='condition-']");
+    forecasts.forEach(function (forecast) {
+        forecast.innerText = verstiConditionCode(forecast.innerText);
+    });
+</script>
 </body>
 <script>
     document.getElementsByTagName("button")[0].onclick = function () {
