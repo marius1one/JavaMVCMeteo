@@ -28,11 +28,13 @@ public class ForecastRestController {
     public void saveData(@RequestBody ForecastSaveModel model) throws IOException {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserEntity currentUser = userRepository.findByUsername(userDetails.getUsername());
+
         var date = model.dateTime;
         var city = model.city;
         var temperature = ForecastService.getTemperature(city, date);
         var conditionCode = ForecastService.getCondition(city, date);
         var forecastEntity = new ForecastEntity(city, date, temperature, conditionCode);
+
         forecastEntity.setUser(currentUser);
         forecastRepository.save(forecastEntity);
 

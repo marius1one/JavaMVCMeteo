@@ -172,7 +172,7 @@
             margin-bottom: 0.5em;
         }
 
-        .orasRytoj>div {
+        .orasRytoj > div {
             background-color: rgba(108, 0, 126, 0.5);
             padding: 1em;
             border-radius: 0.5em;
@@ -190,8 +190,7 @@
         }
 
 
-
-        .selektas{
+        .selektas {
 
             margin-top: 120px;
         }
@@ -214,10 +213,6 @@
         }
 
 
-
-
-
-
     </style>
 </head>
 <body class="screen__background">
@@ -227,24 +222,24 @@
 <span class="screen__background__shape screen__background__shape1"></span>
 
 <div class="main-container">
-<div class="vidurys">
+    <div class="vidurys">
 
 
-    <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button"
-    >Pradinis<img class="ikona" src="/img/home.png" alt="icon"></button>
-    <div class="userLogout">
-        <div class="username" sec:authentication="name" style=" color:whitesmoke; font-size: xx-large"></div>
-        <div>
-            <form action="/logout" method="post">
-                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                <button class="button login__submit" type="submit">
-                    <span class="button__text">Atsijungti</span>
-                    <i class="button__icon fas fa-chevron-right"></i>
-                </button>
-            </form>
+        <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button"
+        >Pradinis<img class="ikona" src="/img/home.png" alt="icon"></button>
+        <div class="userLogout">
+            <div class="username" sec:authentication="name" style=" color:whitesmoke; font-size: xx-large"></div>
+            <div>
+                <form action="/logout" method="post">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                    <button class="button login__submit" type="submit">
+                        <span class="button__text">Atsijungti</span>
+                        <i class="button__icon fas fa-chevron-right"></i>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
 
     <form class="selektas" method="get">
@@ -262,23 +257,20 @@
     </form>
 
 
+    <div class="orasRytoj">
 
 
-
-<div class="orasRytoj">
-
-
-    <div th:each="forecast : ${indexModel.forecasts}" class="forecast">
-        <div class="left-side">
-        <div class="date" th:text="${forecast.dateTime}"></div>
-            <div>Temperatura</div>
-        <div class="temperature" th:text="${forecast.temperature}"></div>
-            <div>Vėjo greitis</div>
-        <div th:text="${forecast.windSpeed}"></div>
+        <div th:each="forecast : ${indexModel.forecasts}" class="forecast">
+            <div class="left-side">
+                <div class="date" th:text="${forecast.dateTime}"></div>
+                <div>Temperatura</div>
+                <div class="temperature" th:text="${forecast.temperature}"></div>
+                <div>Vėjo greitis</div>
+                <div th:text="${forecast.windSpeed}"></div>
+            </div>
+            <img th:src="${'img/' + forecast.conditionCode + '.png'}" alt="Oro salygos">
         </div>
-        <img  th:src="${'img/' + forecast.conditionCode + '.png'}" alt="Oro salygos">
     </div>
-</div>
 </div>
 
 <script>

@@ -29,7 +29,7 @@
         .nav-right {
             gap: 10px;
         }*/
-        body{
+        body {
             overflow-x: hidden;
         }
 
@@ -174,7 +174,7 @@
             align-items: center;
             top: 0;
             right: 0;
-            z-index:2;
+            z-index: 2;
             margin: 0 200px 50px 0;
         }
     </style>
@@ -182,15 +182,15 @@
 <body class="screen__background">
 
 <div class="right">
-<div sec:authentication="name"  style = "font-size: xx-large" class="username">
-</div>
-<div >
-    <form action="/logout" method="post" >
-        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-        <input type="submit" value="Atsijungti">
-    </form>
-</div>
+    <div sec:authentication="name" style="font-size: xx-large" class="username">
     </div>
+    <div>
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+            <input type="submit" value="Atsijungti">
+        </form>
+    </div>
+</div>
 <div>
     <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button"
             style="width: 10%; float: left">Pradinis<img class="ikona" src="/img/home.png" alt="homeIcon">

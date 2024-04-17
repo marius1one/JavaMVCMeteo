@@ -27,10 +27,12 @@ public class RegistrationController {
     @PostMapping("/register")
     public String registerUser(@RequestParam String username, @RequestParam String password, Model model) {
         UserEntity existingUser = userRepository.findByUsername(username);
+
         if (existingUser != null) {
             model.addAttribute("error", "Username already exists");
             return "register";
         }
+
         UserEntity newUser = new UserEntity();
         newUser.setUsername(username);
         newUser.setPassword(passwordEncoder.encode(password));

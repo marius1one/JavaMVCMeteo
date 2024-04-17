@@ -41,6 +41,7 @@ public class ForecastController {
     @GetMapping("/")
     public ModelAndView index(@RequestParam(required = false) String city, @RequestParam(required = false) String date) throws IOException {
         ModelAndView modelAndView = new ModelAndView("index");
+
         var indexModel = new IndexModel();
         indexModel.city = city;
         indexModel.date = date;
@@ -68,9 +69,7 @@ public class ForecastController {
             indexModel.city = "Vilnius";
         }
 
-
         indexModel.forecasts = forecastService.getForecastsVilnius(city);
-
 
         modelAndView.addObject("indexModel", indexModel);
 
@@ -81,9 +80,11 @@ public class ForecastController {
 
     public ModelAndView oraiDidziuosiuoseMiestuose() throws IOException {
         ModelAndView modelAndView = new ModelAndView("oraiDidziuosiuoseMiestuose");
+
         var indexModel = new IndexModel();
         var indexModel1 = new IndexModel();
         var indexModel2 = new IndexModel();
+
         indexModel.city = "Vilnius";
         indexModel.forecasts = forecastService.getForecastsVilnius(indexModel.city);
 
@@ -113,7 +114,6 @@ public class ForecastController {
             city = "vilnius";
             indexModel.city = "Vilnius";
         }
-
 
         indexModel.forecasts = forecastService.getForecastsForTomorrow(city, currentUser);
 

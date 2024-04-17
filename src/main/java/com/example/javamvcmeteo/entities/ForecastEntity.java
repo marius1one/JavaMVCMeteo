@@ -42,6 +42,4 @@ public ForecastEntity(String city, String date, String temperature, String condi
     public String getCity() {
         return city;
     }
-
-
 }

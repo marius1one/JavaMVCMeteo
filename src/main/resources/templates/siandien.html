@@ -14,8 +14,6 @@
             display: flex;
             overflow: hidden;
             background-size: cover;
-
-
         }
 
 
@@ -25,7 +23,6 @@
         }
 
         select {
-
             background: #a13e97;
         }
 
@@ -80,6 +77,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
         }
+
         .userLogout {
             position: absolute;
             top: 0;
@@ -142,16 +140,17 @@
             style="width: 10%; float: left">Pradinis<img class="ikona" src="/img/home.png" alt="homeIcon"></button>
 
     <div class="userLogout">
-    <div class="username" sec:authentication="name" style="float: right; color: whitesmoke; font-size: xx-large"></div>
-    <div>
-        <form action="/logout" method="post">
-            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-            <button class="button login__submit" type="submit">
-                <span class="button__text">Atsijungti</span>
-                <i class="button__icon fas fa-chevron-right"></i>
-            </button>
-        </form>
-    </div>
+        <div class="username" sec:authentication="name"
+             style="float: right; color: whitesmoke; font-size: xx-large"></div>
+        <div>
+            <form action="/logout" method="post">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <button class="button login__submit" type="submit">
+                    <span class="button__text">Atsijungti</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </form>
+        </div>
     </div>
     <div>
 
@@ -191,7 +190,8 @@
     <div>
         <h2>Oro sąlygos</h2>
     </div>
-    <div style="font-size: xx-large" th:id="'condition-' + ${indexModel.forecasts.get(4).conditionCode}" th:text="${indexModel.forecasts.get(4).conditionCode}">
+    <div style="font-size: xx-large" th:id="'condition-' + ${indexModel.forecasts.get(4).conditionCode}"
+         th:text="${indexModel.forecasts.get(4).conditionCode}">
 
     </div>
     <script th:inline="javascript">

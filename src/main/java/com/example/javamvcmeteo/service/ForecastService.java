@@ -46,6 +46,7 @@ public class ForecastService {
         if (city != null && !city.isEmpty()) {
             var meteoForecastsJson = GetMeteoForecastsJson(city);
             Root meteoObj = GetObjectFromJson(meteoForecastsJson);
+
             for (var item : meteoObj.forecastTimestamps) {
                 if (date == null || item.forecastTimeUtc.startsWith(date)) {
                     var row = new ForecastModel(item.forecastTimeUtc, item.airTemperature, item.windSpeed, item.conditionCode);
@@ -95,6 +96,7 @@ public class ForecastService {
         var forecasts = new ArrayList<ForecastModel>();
         var meteoForecastsJson = GetMeteoForecastsJson(city);
         Root meteoObj = GetObjectFromJson(meteoForecastsJson);
+
         for (var item : meteoObj.forecastTimestamps) {
             var row = new ForecastModel(item.forecastTimeUtc, item.airTemperature, item.windSpeed, item.conditionCode);
             forecasts.add(row);
