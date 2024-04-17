@@ -254,16 +254,21 @@
                 break;
             case 'light-rain':
                 body.style.backgroundImage = "url('/img/lightrain.jpg')";
-
+                document.getElementsByTagName("select")[0].style.backgroundColor = "darkgoldenrod";
                 break;
             case 'cloudy':
                 body.style.backgroundImage = "url('/img/cloudy.jpg')";
+                document.getElementsByClassName("username")[0].style.textShadow =
+                    "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
+                document.getElementsByTagName("select")[0].style.backgroundColor = "grey";
                 break;
             case 'clear':
                 body.style.backgroundImage = "url('/img/clear.jpg')";
+                document.getElementsByTagName("select")[0].style.backgroundColor = "teal";
                 break;
             case 'partly-cloudy':
                 body.style.backgroundImage = "url('/img/partlycloudy.jpg')";
+                document.getElementsByTagName("select")[0].style.backgroundColor = "white";
                 break;
 
             default:
