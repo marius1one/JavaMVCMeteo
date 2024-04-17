@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rytojaus orai</title>
+    <style>
+        body {
+            background: rgb(40, 14, 59);
+            background: linear-gradient(0deg, rgba(40, 14, 59, 1) 0%, rgba(161, 62, 151, 1) 100%);
+            display: flex;
+            overflow: hidden;
+            height: 100vh;
+
+        }
+
+        button {
+            height: 5%;
+            width: 100%;
+            background-color: rgba(161, 62, 151, 1);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin: 10px;
+
+        }
+
+        button:hover {
+            background-color: rgba(40, 14, 59, 1);
+            color: rgb(255, 255, 255);
+        }
+
+        .ikona {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            margin-left: 5px;
+        }
+
+        .screen__background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            -webkit-clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
+        }
+
+        .screen__background__shape {
+            transform: rotate(45deg);
+            position: absolute;
+        }
+
+        .screen__background__shape1 {
+            height: 520px;
+            width: 520px;
+            background: #FFF;
+            top: -50px;
+            right: 120px;
+            border-radius: 0 72px 0 0;
+        }
+
+        .screen__background__shape2 {
+            height: 220px;
+            width: 220px;
+            background: rgba(161, 62, 151, 1);
+            top: -172px;
+            right: 0;
+            border-radius: 32px;
+        }
+
+        .screen__background__shape3 {
+            height: 540px;
+            width: 190px;
+            background: linear-gradient(270deg, rgba(161, 62, 151, 1), rgba(40, 14, 59, 1));
+            top: -24px;
+            right: 0;
+            border-radius: 32px;
+        }
+
+        .screen__background__shape4 {
+            height: 400px;
+            width: 200px;
+            background: rgba(40, 14, 59, 1);
+            top: 420px;
+            right: 50px;
+            border-radius: 60px;
+        }
+
+        .vidurys {
+            position: fixed;
+            top: 0;
+            width: 60%;
+            height: 10%;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-left: 20%;
+            background-color: rgba(108, 0, 126, 0.5);
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .btn.btn-outline-light {
+            width: 15%;
+            height: 65%;
+            align-self: flex-start;
+        }
+
+        .userLogout {
+            display: inline-flex;
+            padding-right: 20px;
+        }
+
+        .login__submit {
+            background: #fff;
+            font-size: 12px;
+
+            padding: 6px 10px;
+            border-radius: 26px;
+            border: 1px solid #D4D3E8;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            color: rgba(40, 14, 59, 1);
+            box-shadow: 0 2px 2px #5C5696;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+
+        .login__submit:active,
+        .login__submit:focus,
+        .login__submit:hover {
+            border-color: #6A679E;
+            outline: none;
+        }
+
+        .button__icon {
+            font-size: 16px;
+            margin-left: auto;
+            color: #7875B5;
+        }
+
+        .orasRytoj {
+            height: 80vh;
+            width: 90vw;
+            margin-top: 10%;
+            overflow-y: auto;
+            padding: 1em;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .orasRytoj .date,
+        .orasRytoj .temperature {
+            color: #fff;
+            font-size: 1.2em;
+            margin-bottom: 0.5em;
+        }
+
+        .orasRytoj>div {
+            background-color: rgba(108, 0, 126, 0.5);
+            padding: 1em;
+            border-radius: 0.5em;
+            margin: 0.5em;
+            width: calc(100% / 3 - 1em);
+            box-sizing: border-box;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+
+
+        .selektas{
+
+            margin-top: 120px;
+        }
+
+        .orasRytoj img {
+            max-width: 100%;
+            height: 100px;
+        }
+
+        .orasRytoj .forecast {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 1em;
+        }
+
+        .left-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+
+
+
+
+    </style>
+</head>
+<body class="screen__background">
+<span class="screen__background__shape screen__background__shape4"></span>
+<span class="screen__background__shape screen__background__shape3"></span>
+<span class="screen__background__shape screen__background__shape2"></span>
+<span class="screen__background__shape screen__background__shape1"></span>
+
+<div class="main-container">
+<div class="vidurys">
+
+
+    <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button"
+    >Pradinis<img class="ikona" src="/img/home.png" alt="icon"></button>
+    <div class="userLogout">
+        <div class="username" sec:authentication="name" style=" color:whitesmoke; font-size: xx-large"></div>
+        <div>
+            <form action="/logout" method="post">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <button class="button login__submit" type="submit">
+                    <span class="button__text">Atsijungti</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    <form class="selektas" method="get">
+        <select name="city" onchange="this.form.submit()">
+            <option value="">Select city</option>
+            <option value="vilnius" th:selected="${indexModel.city=='vilnius'}">Vilnius</option>
+            <option value="kaunas" th:selected="${indexModel.city=='kaunas'}">Kaunas</option>
+            <option value="klaipeda" th:selected="${indexModel.city=='klaipeda'}">Klaipėda</option>
+            <option value="siauliai" th:selected="${indexModel.city=='siauliai'}">Šiauliai</option>
+            <option value="panevezys" th:selected="${indexModel.city=='panevezys'}">Panevėžys</option>
+            <option value="marijampole" th:selected="${indexModel.city=='marijampole'}">Marijampolė</option>
+            <option value="alytus" th:selected="${indexModel.city=='alytus'}">Alytus</option>
+            <option value="telsiai" th:selected="${indexModel.city=='telsiai'}">Telšiai</option>
+        </select>
+    </form>
+
+
+
+
+
+<div class="orasRytoj">
+
+
+    <div th:each="forecast : ${indexModel.forecasts}" class="forecast">
+        <div class="left-side">
+        <div class="date" th:text="${forecast.dateTime}"></div>
+            <div>Temperatura</div>
+        <div class="temperature" th:text="${forecast.temperature}"></div>
+            <div>Vėjo greitis</div>
+        <div th:text="${forecast.windSpeed}"></div>
+        </div>
+        <img  th:src="${'img/' + forecast.conditionCode + '.png'}" alt="Oro salygos">
+    </div>
+</div>
+</div>
+
+<script>
+    document.getElementsByTagName("button")[0].onclick = function () {
+        location.href = "/"
+    }
+</script>
+
+</body>
+</html>

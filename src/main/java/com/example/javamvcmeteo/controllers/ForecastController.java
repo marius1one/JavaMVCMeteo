@@ -100,5 +100,28 @@ public class ForecastController {
         return modelAndView;
     }
 
+    @GetMapping("/rytoj")
+    public ModelAndView rytoj(@RequestParam(required = false) String city) throws IOException {
+        ModelAndView modelAndView = new ModelAndView("rytoj");
+
+        UserEntity currentUser = getCurrentUser();
+
+        var indexModel = new IndexModel();
+        indexModel.city = city;
+
+        if (indexModel.city == null || indexModel.city.isEmpty()) {
+            city = "vilnius";
+            indexModel.city = "Vilnius";
+        }
+
+
+        indexModel.forecasts = forecastService.getForecastsForTomorrow(city, currentUser);
+
+
+        modelAndView.addObject("indexModel", indexModel);
+
+        return modelAndView;
+    }
+
 
 }

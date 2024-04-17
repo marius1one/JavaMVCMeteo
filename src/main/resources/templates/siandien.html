@@ -255,6 +255,9 @@
             case 'light-rain':
                 body.style.backgroundImage = "url('/img/lightrain.jpg')";
                 document.getElementsByTagName("select")[0].style.backgroundColor = "darkgoldenrod";
+                document.querySelectorAll("p").forEach(p => p.style.color = "white");
+                document.querySelectorAll("p").forEach(p => p.style.textShadow =
+                    "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black");
                 break;
             case 'cloudy':
                 body.style.backgroundImage = "url('/img/cloudy.jpg')";

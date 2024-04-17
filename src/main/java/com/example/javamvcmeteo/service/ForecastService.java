@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -101,4 +103,35 @@ public class ForecastService {
     }
 
 
+    public ArrayList<ForecastModel> getForecastsForTomorrow(String city, UserEntity user) throws IOException {
+        var forecasts = new ArrayList<ForecastModel>();
+
+        if (city != null && !city.isEmpty()) {
+            var meteoForecastsJson = GetMeteoForecastsJson(city);
+            Root meteoObj = GetObjectFromJson(meteoForecastsJson);
+
+            // Get the current date plus one day
+            LocalDateTime nextDay = LocalDateTime.now().plusDays(1);
+
+            for (var item : meteoObj.forecastTimestamps) {
+                // Parse the date from the forecast
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime forecastDate = LocalDateTime.parse(item.forecastTimeUtc, formatter);
+
+                // Check if the forecast date is the same as the next day
+                if (forecastDate.toLocalDate().equals(nextDay.toLocalDate())) {
+                    var row = new ForecastModel(item.forecastTimeUtc, item.airTemperature, item.windSpeed, item.conditionCode);
+                    boolean alreadyExists = forecastRepository.existsByDateAndCityAndUser(item.forecastTimeUtc, city, user);
+                    row.setAlreadyExists(alreadyExists);
+                    forecasts.add(row);
+                }
+            }
+        }
+
+        return forecasts;
+    }
+
+    // ...
 }
+
+

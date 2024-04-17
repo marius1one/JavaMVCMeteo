@@ -188,8 +188,6 @@
                     class="ikona" src="/img/saule.png" alt="sunIcon"></button>
             <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Rytoj<img
                     class="ikona" src="/img/tomorrow.png" alt="tomorrowIcon"></button>
-            <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Savaitės orai<img
-                    class="ikona" src="/img/week-icon.png" alt="calendarIcon"></button>
             <button type="button" class="btn btn-outline-light" role="button" data-bs-toggle="button">Išsaugoti orai<img
                     class="ikona" src="/img/saved.png" alt="savedIcon"></button>
         </div>
@@ -263,11 +261,19 @@
     document.getElementsByTagName("button")[1].onclick = function () {
         location.href = "/siandien"
     }</script>
+
 <script>
     document.getElementsByTagName("button")[4].onclick = () => {
         location.href = "/issaugotiOrai"
     }
 </script>
+
+<script>
+    document.getElementsByTagName("button")[2].onclick = () => {
+        location.href = "/rytoj"
+    }
+</script>
+
 <script>
     function save(element) {
         let parent = element.parentElement.parentElement;
