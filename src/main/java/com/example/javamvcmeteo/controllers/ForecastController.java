@@ -69,7 +69,7 @@ public class ForecastController {
             indexModel.city = "Vilnius";
         }
 
-        indexModel.forecasts = forecastService.getForecastsVilnius(city);
+        indexModel.forecasts = forecastService.getForecastsByCity(city);
 
         modelAndView.addObject("indexModel", indexModel);
 
@@ -86,13 +86,13 @@ public class ForecastController {
         var indexModel2 = new IndexModel();
 
         indexModel.city = "Vilnius";
-        indexModel.forecasts = forecastService.getForecastsVilnius(indexModel.city);
+        indexModel.forecasts = forecastService.getForecastsByCity(indexModel.city);
 
         indexModel1.city = "Kaunas";
-        indexModel1.forecasts = forecastService.getForecastsVilnius(indexModel1.city);
+        indexModel1.forecasts = forecastService.getForecastsByCity(indexModel1.city);
 
         indexModel2.city = "Klaipeda";
-        indexModel2.forecasts = forecastService.getForecastsVilnius(indexModel2.city);
+        indexModel2.forecasts = forecastService.getForecastsByCity(indexModel2.city);
 
         modelAndView.addObject("indexModel", indexModel);
         modelAndView.addObject("indexModel1", indexModel1);

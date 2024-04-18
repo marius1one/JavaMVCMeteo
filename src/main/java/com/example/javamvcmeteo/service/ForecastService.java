@@ -92,7 +92,7 @@ public class ForecastService {
     }
 
 
-    public ArrayList<ForecastModel> getForecastsVilnius(String city) throws IOException {
+    public ArrayList<ForecastModel> getForecastsByCity(String city) throws IOException {
         var forecasts = new ArrayList<ForecastModel>();
         var meteoForecastsJson = GetMeteoForecastsJson(city);
         Root meteoObj = GetObjectFromJson(meteoForecastsJson);
