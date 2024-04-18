@@ -1,0 +1,89 @@
+body {
+    /*background: rgb(40,14,59);
+    background: linear-gradient(0deg, rgba(40,14,59,1) 0%, rgba(161,62,151,1) 100%);*/
+    display: flex;
+    overflow: hidden;
+    background-size: cover;
+}
+
+
+div {
+    margin: 0 auto auto;
+    /*color: #d3b7d8;*/
+}
+
+select {
+    background: #a13e97;
+}
+
+.login__submit {
+    background: #fff;
+    font-size: 12px;
+
+    padding: 6px 10px;
+    border-radius: 26px;
+    border: 1px solid #D4D3E8;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: rgba(40, 14, 59, 1);
+    box-shadow: 0 2px 2px #5C5696;
+    cursor: pointer;
+    transition: .2s;
+}
+
+
+.login__submit:active,
+.login__submit:focus,
+.login__submit:hover {
+    border-color: #6A679E;
+    outline: none;
+}
+
+.button__icon {
+    font-size: 16px;
+    margin-left: auto;
+    color: #7875B5;
+}
+
+.ikona {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin-left: 5px;
+}
+
+.vidurys {
+    width: 50%;
+    margin-top: 50px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+.userLogout {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+
+.sonai {
+    height: 98vh;
+    margin-top: 7px;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
