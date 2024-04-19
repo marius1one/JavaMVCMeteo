@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 
-public class ForecastEntity  {
+public class ForecastEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,15 +12,16 @@ public class ForecastEntity  {
 
     public String city;
     public String date;
-
+    boolean alreadyExists;
     public String temperature;
     public String conditionCode;
     @ManyToOne
     private UserEntity user;
+
     public ForecastEntity() {
     }
 
-public ForecastEntity(String city, String date, String temperature, String conditionCode) {
+    public ForecastEntity(String city, String date, String temperature, String conditionCode) {
         this.city = city;
         this.date = date;
         this.temperature = temperature;
